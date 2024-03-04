@@ -15,6 +15,7 @@ interface Props {
   date: string,
   location: string,
   image: string,
+  setOpen: (value: boolean) => void,
 }
 
 function Truncate(str: string, maxLength: number) {
@@ -25,10 +26,13 @@ function Truncate(str: string, maxLength: number) {
   }
 }
 
-export default function LegalNeedCard({title, name, date, location, image}: Props) {
+export default function LegalNeedCard({title, name, date, location, image, setOpen}: Props) {
+  const onClick = () => {
+    setOpen(true);
+  };
   return (
     <Card sx={{ maxWidth: 345 }}>
-      <CardActionArea>
+      <CardActionArea onClick={onClick}>
         <CardHeader
           avatar={
             <UserIcon name={name}/>
