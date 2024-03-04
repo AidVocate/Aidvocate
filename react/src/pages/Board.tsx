@@ -7,12 +7,6 @@ import { LawAlberta, KingsCourt, LawCourts } from '../dev/LegalNeeds';
 export default function Board() {
   const [boardData, setBoardData] = useState([]);
   const [open, setOpen] = useState(false);
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = (value: string) => {
-    setOpen(false);
-  };
 
   useEffect(() => {
     axiosClient.get('/legalneeds')
