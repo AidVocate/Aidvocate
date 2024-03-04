@@ -8,4 +8,8 @@ use Illuminate\Http\Request;
 class ListFormController extends Controller
 {
     //
+    function ListFormView()
+    {
+        return view('ListForm.ListLegalNeed');
+    }
 }

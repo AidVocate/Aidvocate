@@ -1,6 +1,6 @@
 <h1>List Legal Need</h1>
 
-<table>
+{{-- <table>
     <tr>
         <td>First Name</td>
         <td>Last Name</td>
@@ -21,4 +21,4 @@
             <td>{{$legalneed['CaseDescription']}}</td>
         </tr>
     @endforeach
-</table>
+</table> --}}
