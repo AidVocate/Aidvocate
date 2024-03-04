@@ -2,11 +2,10 @@ import { Outlet }  from "react-router-dom";
 import Navigation from '../components/Navigation';
 
 export default function Layout() {
-  const backgroundImageUrl = 'url("/background.webp")';
   return (
     <div
         style={{
-          backgroundImage: backgroundImageUrl,
+          backgroundImage: 'url("/background.webp")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundAttachment: 'fixed',
