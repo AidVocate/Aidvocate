@@ -1,5 +1,10 @@
 <h1>List Legal Need</h1>
 
+<form action="{{ route('list') }}" method="GET">
+    <input type="text" name="search" value="{{ $search }}" placeholder="Case Nature...">
+    <button type="submit">Search</button>
+</form>
+
 <table>
     <tr>
         <td>First Name</td>
@@ -10,15 +15,15 @@
         <td>Court Time</td>
         <td>Case Description</td>
     </tr>
-    @foreach($legalneed as $legalneed)
+    @foreach($data as $item)
         <tr>
-            <td>{{$legalneed['FirstName']}}</td>
-            <td>{{$legalneed['LastName']}}</td>
-            <td>{{$legalneed['Email']}}</td>
-            <td>{{$legalneed['CaseRole']}}</td>
-            <td>{{$legalneed['CourtDate']}}</td>
-            <td>{{$legalneed['CourtTime']}}</td>
-            <td>{{$legalneed['CaseDescription']}}</td>
+            <td>{{$item['FirstName']}}</td>
+            <td>{{$item['LastName']}}</td>
+            <td>{{$item['Email']}}</td>
+            <td>{{$item['CaseRole']}}</td>
+            <td>{{$item['CourtDate']}}</td>
+            <td>{{$item['CourtTime']}}</td>
+            <td>{{$item['CaseDescription']}}</td>
         </tr>
-    @endforeach
+    @endforeach 
 </table>
