@@ -1,21 +1,22 @@
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-
+import Button from '@mui/material/Button';
+import Container from '@mui/material/Container';
+import { Link } from 'react-router-dom';
 
 export default function Index() {
   return (
-    <Card sx={{ minWidth: 275 }}>
-      <CardContent>
-        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          Place Holder Index
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <Button size="small">Learn More</Button>
-      </CardActions>
-    </Card>
-  );
+    <Container maxWidth="xl" className="text-white text-center mt-20">
+      <img src='/advocaid.webp' alt="Logo" className="w-96 h-auto mb-20 mx-auto" />
+      <Typography variant="h1" gutterBottom>
+        Unlocking Justice
+      </Typography>
+      <Typography variant="h2" paragraph color="secondary">
+        Alberta's Gateway to Pro Bono Legal Assistance
+      </Typography>
+      <Typography variant="h5" paragraph>
+        AdvocAid is a pioneering online platform dedicated to enhancing access to justice in Alberta. It serves as a vital link between the public,
+        legal professionals, and pro bono organizations, ensuring pro bono legal assistance is accessible and efficient for everyone.
+      </Typography>
+    </Container>
+  )
 }
