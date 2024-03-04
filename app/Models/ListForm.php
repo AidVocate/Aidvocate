@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class ListForm extends Model
 {
     use HasFactory;
+
+    protected $table = 'ClientForm';
 }
