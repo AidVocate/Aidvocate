@@ -8,15 +8,7 @@ import Typography from '@mui/material/Typography';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import ExploreIcon from '@mui/icons-material/Explore';
 import UserIcon from '../components/UserIcon';
-
-interface Props {
-  title: string,
-  name: string,
-  date: string,
-  location: string,
-  image: string,
-  setOpen: (value: boolean) => void,
-}
+import LegalNeedCardInterface from '../interfaces/LegalNeedCardInterface';
 
 function Truncate(str: string, maxLength: number) {
   if (str.length > maxLength) {
@@ -26,8 +18,18 @@ function Truncate(str: string, maxLength: number) {
   }
 }
 
-export default function LegalNeedCard({title, name, date, location, image, setOpen}: Props) {
+export default function LegalNeedCard({text, name, date, location, type, image, setOpen, setSelected}: LegalNeedCardInterface) {
   const onClick = () => {
+    setSelected({
+      text: text,
+      name: name,
+      date: date,
+      location: location,
+      type: type,
+      image: image,
+      setOpen: setOpen,
+      setSelected: setSelected
+    })
     setOpen(true);
   };
   return (
@@ -37,7 +39,7 @@ export default function LegalNeedCard({title, name, date, location, image, setOp
           avatar={
             <UserIcon name={name}/>
           }
-          title={name}
+          text={name}
           subheader={date}
         />
         <CardMedia
@@ -48,7 +50,7 @@ export default function LegalNeedCard({title, name, date, location, image, setOp
         />
         <CardContent>
           <Typography variant="body1" fontWeight="bold" color="text.primary">
-            {Truncate(title, 35)}
+            {Truncate(text, 35)}
           </Typography>
           <Grid container alignItems="center">
             <Grid item>
@@ -56,7 +58,7 @@ export default function LegalNeedCard({title, name, date, location, image, setOp
             </Grid>
             <Grid item>
               <Typography variant="subtitle1" color="text.secondary">
-                Civil Claims Duty
+                {type}
               </Typography>
             </Grid>
           </Grid>
