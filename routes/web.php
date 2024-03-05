@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ListFormController;
+use App\Http\Controllers\ViewFormController;
 use App\Http\Controllers\ClientFormController;
 
 /*
@@ -26,11 +27,8 @@ Route::get('/register', [AuthController::class, 'create']);
 Route::post('/users', [AuthController::class, 'store']);
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
-
 Route::post('/logout', [AuthController::class, 'logout']);
-
 Route::get('/lnlist', [ListFormController::class, 'list'])->name('list');
-
-Route::get('/lnform',[ClientFormController::class, 'ClientFormView']);
-Route::post('/newclientform',[ClientFormController::class, 'AddClientForm']);
+Route::get('/lnform', [ClientFormController::class, 'ClientFormView']);
+Route::post('/newclientform', [ClientFormController::class, 'AddClientForm']);
 Route::get('/viewclientform', [ViewFormController::class, 'index']);

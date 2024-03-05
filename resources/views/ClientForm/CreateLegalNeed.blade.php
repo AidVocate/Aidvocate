@@ -3,17 +3,17 @@
 @section('title', 'Client Form')
 
 @section('content')
-    <h2>Add Client Form</h2>
-    <div class="form-row">
+<div class="container mt-5">
+    <h2 class="mb-4">Add Client Form</h2>
 
-        <form action="/newclientform" method="POST">
+        <form action="/newclientform" method="POST" class="row g-3">
             @csrf
-            <div class="form-group col-md-2">
+            <div class="col-md-6">
                 <label for="id">Account ID:</label><br>
                 <input class="form-control" type="text" id="id" name="id"><br><br>
             </div>
 
-            <div class="form-group col-md-2">
+            <div class="col-md-6">
                 @error('FirstName')
                     <p class="text-danger">{{ $message }}</p>
                 @enderror
@@ -22,7 +22,7 @@
 
             </div>
 
-            <div class="form-group col-md-2">
+            <div class="col-md-6">
 
                 <label for="LastName">Last Name:</label><br>
                 <input class="form-control" type="text" id="LastName" name="LastName"><br><br>
@@ -33,7 +33,7 @@
             </div>
 
 
-            <div class="form-group col-md-2">
+            <div class="col-md-6">
                 <label for="DateOfBirth">Date of Birth:</label><br>
                 <input class="form-control" type="date" id="DateOfBirth" name="DateOfBirth"><br><br>
                 @error('DateOfBirth')
@@ -41,7 +41,7 @@
                 @enderror
             </div>
 
-            <div class="form-group col-md-2">
+            <div class="col-md-6">
                 <label for="Address">Address:</label><br>
                 <input class="form-control" type="text" id="Address" name="Address"><br><br>
                 @error('Address')
@@ -49,7 +49,7 @@
                 @enderror
             </div>
 
-            <div class="form-group col-md-2">
+            <div class="col-md-6">
                 <label for="Phone">Phone:</label><br>
                 <input class="form-control" type="text" id="Phone" name="Phone"><br><br>
                 @error('Phone')
@@ -67,7 +67,7 @@
             </div>
 
 
-            <div class="form-group col-md-2">
+            <div class="col-md-6">
                 <label for="CaseRole">Case Role:</label><br>
                 <select class="form-control" name="CaseRole" id="CaseRole">
                     <option value="Plaintiff">Plaintiff</option>
@@ -75,7 +75,7 @@
                 </select><br><br>
             </div>
 
-<div class="form-group col-md-2">  
+<div class="col-md-6">  
      <label for="PlaintiffNames">Plaintiff Names:</label><br>
             <input class="form-control" type="text" id="PlaintiffNames" name="PlaintiffNames"><br><br>
 </div>
@@ -113,7 +113,7 @@
             </select> <br><br>
             </div>
            
-<div class="form-group col-md-2">
+<div class="col-md-6">
             <label for="CourtDocuments">Court Documents:</label><br>
             <label for="CourtDocumentsYes">Yes</label>
             <input type="radio" id="CourtDocumentsYes" name="CourtDocuments" value="1">
@@ -121,20 +121,15 @@
             <input type="radio" id="CourtDocumentsNo" name="CourtDocuments" value="0" checked><br><br>
 </div>
             
-<div class="form-group col-md-2">
+<div class="col-md-6">
     <label for="Interpreter">Interpreter :</label><br>
             <label for="InterpreterYes">Yes</label>
             <input type="radio" id="InterpreterYes" name="Interpreter" value="1">
             <label for="InterpreterNo">No</label>
             <input type="radio" id="InterpreterNo" name="Interpreter" value="0" checked><br><br>
 </div>
-            
-<div class="form-group col-md-2">
-     <label for="InterpreterLanguage">Interpreter Language:</label><br>
-            <input class="form-control" type="text" id="InterpreterLanguage" name="InterpreterLanguage"><br><br>
-</div>
            
-<div class="form-group col-md-2">
+<div class="col-md-6">
      <!-- Case Description -->
             <label for="CaseDescription">Case Description:</label><br>
             <textarea class="form-control" id="CaseDescription" name="CaseDescription" rows="4" cols="50"></textarea><br><br>
@@ -152,48 +147,55 @@
             <input class="form-control"  type="text" id="CaseQuestionThree" name="CaseQuestionThree"><br><br>
 </div>
            
-<div class="form-group col-md-2">
-     <!-- Pending Cases -->
-            <label for="PendingCases">Pending Cases:</label><br>
-            <input type="checkbox" id="PendingCases" name="PendingCases" value="1"><br><br>
-
+<div class="col-md-6">
+    <div class="form-check mb-3">
+        <input class="form-check-input" type="checkbox" id="PendingCases" name="PendingCases" value="1">
+        <label class="form-check-label" for="PendingCases">Pending Cases</label>
+    </div>
 </div>
            
-            <!-- Opposing Representative -->
-            <label for="OpposingRep">Opposing Representative:</label><br>
-            <input class="form-control"type="text" id="OpposingRep" name="OpposingRep"><br><br>
+<div class="col-md-6">
+    <label for="OpposingRep" class="form-label">Opposing Representative:</label>
+    <input type="text" class="form-control" id="OpposingRep" name="OpposingRep">
+</div>
 
-            <!-- Current Assistance -->
-            <label for="CurrentAssistance">Current Assistance:</label><br>
-            <select class="form-control"  id="CurrentAssistance" name="CurrentAssistance">
-                <option value="1">Yes</option>
-                <option value="0">No</option>
-                <option value="2">Unsure</option>
-            </select><br><br>
+<div class="col-md-6">
+    <label for="CurrentAssistance" class="form-label">Current Assistance:</label>
+    <select class="form-select" id="CurrentAssistance" name="CurrentAssistance">
+        <option value="1">Yes</option>
+        <option value="0">No</option>
+        <option value="2">Unsure</option>
+    </select>
+</div>
 
-            <!-- Previous Assistance -->
-            <label for="PreviousAssistance">Previous Assistance:</label><br>
-            <input type="checkbox" id="PreviousAssistance" name="PreviousAssistance" value="1"><br><br>
+<div class="col-md-6">
+    <div class="form-check mb-3">
+        <input class="form-check-input" type="checkbox" id="PreviousAssistance" name="PreviousAssistance" value="1">
+        <label class="form-check-label" for="PreviousAssistance">Previous Assistance</label>
+    </div>
+</div>
 
-            <!-- Previous Assistance Description -->
-            <label for="PreviousDescription">Previous Assistance Description:</label><br>
-            <textarea class="form-control"  id="PreviousDescription" name="PreviousDescription" rows="4" cols="50"></textarea><br><br>
+<div class="col-md-6">
+    <div class="form-check mb-3">
+        <input class="form-check-input" type="checkbox" id="FirstTime" name="FirstTime" value="1">
+        <label class="form-check-label" for="FirstTime">First Time</label>
+    </div>
+</div>
 
-            <!-- First Time -->
-            <label for="FirstTime">First Time:</label><br>
-            <input type="checkbox" id="FirstTime" name="FirstTime" value="1"><br><br>
+<div class="col-md-6">
+    <label for="Signature" class="form-label">Signature:</label>
+    <input type="text" class="form-control" id="Signature" name="Signature">
+</div>
 
-            <!-- Signature -->
-            <label for="Signature">Signature:</label><br>
-            <input class="form-control"type="text" id="Signature" name="Signature"><br><br>
+<div class="col-md-6">
+    <label for="PrintName" class="form-label">Print Name:</label>
+    <input type="text" class="form-control" id="PrintName" name="PrintName">
+</div>
 
-            <!-- Print Name -->
-            <label for="PrintName">Print Name:</label><br>
-            <input class="form-control"type="text" id="PrintName" name="PrintName"><br><br>
-
-            <!-- Signed Date -->
-            <label for="SignedDate">Signed Date:</label><br>
-            <input class="form-control"type="date" id="SignedDate" name="SignedDate"><br><br>
+<div class="col-md-6">
+    <label for="SignedDate" class="form-label">Signed Date:</label>
+    <input type="date" class="form-control" id="SignedDate" name="SignedDate">
+</div>
 
 
 
