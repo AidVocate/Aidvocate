@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ListFormController;
+use App\Http\Controllers\ClientFormController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,3 +31,6 @@ Route::post('/logout', [AuthController::class, 'logout']);
 
 Route::get('/lnlist', [ListFormController::class, 'list'])->name('list');
 
+Route::get('/lnform',[ClientFormController::class, 'ClientFormView']);
+Route::post('/newclientform',[ClientFormController::class, 'AddClientForm']);
+Route::get('/viewclientform', [ViewFormController::class, 'index']);
