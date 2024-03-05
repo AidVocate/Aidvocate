@@ -1,29 +1,49 @@
-<h1>List Legal Need</h1>
+@extends('layout/layout')
 
-<form action="{{ route('list') }}" method="GET">
-    <input type="text" name="search" value="{{ $search }}" placeholder="Case Nature...">
-    <button type="submit">Search</button>
-</form>
+@section('title', 'Client Form')
 
-<table>
-    <tr>
-        <td>First Name</td>
-        <td>Last Name</td>
-        <td>Email</td>
-        <td>Case Role</td>
-        <td>Court Date</td>
-        <td>Court Time</td>
-        <td>Case Description</td>
-    </tr>
-    @foreach($data as $item)
-        <tr>
-            <td>{{$item['FirstName']}}</td>
-            <td>{{$item['LastName']}}</td>
-            <td>{{$item['Email']}}</td>
-            <td>{{$item['CaseRole']}}</td>
-            <td>{{$item['CourtDate']}}</td>
-            <td>{{$item['CourtTime']}}</td>
-            <td>{{$item['CaseDescription']}}</td>
-        </tr>
-    @endforeach 
-</table>
+@section('content')
+
+<div class="container mt-5">
+    <h1 class="mb-4">List Legal Need</h1>
+
+    <form action="{{ route('list') }}" method="GET" class="mb-4">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" name="search" value="{{ $search }}" placeholder="Case Nature..." aria-label="Case Nature">
+            <button class="btn btn-outline-secondary" type="submit">Search</button>
+        </div>
+    </form>
+
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Case Role</th>
+                    <th scope="col">Court Date</th>
+                    <th scope="col">Court Time</th>
+                    <th scope="col">Case Description</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($data as $item)
+                    <tr>
+                        <td>{{$item['FirstName']}}</td>
+                        <td>{{$item['LastName']}}</td>
+                        <td>{{$item['CaseRole']}}</td>
+                        <td>{{$item['CourtDate']}}</td>
+                        <td>{{$item['CourtTime']}}</td>
+                        <td>{{$item['CaseDescription']}}</td>
+                        <td>
+                            <a href="/viewlegalneed/{{$item['FormID']}}" class="btn btn-primary btn-sm">View</a>
+                        </td>
+                    </tr>
+                @endforeach 
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@endsection

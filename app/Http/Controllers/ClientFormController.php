@@ -95,4 +95,9 @@ class ClientFormController extends Controller
 
         return redirect('/')->with('message', 'Legal Need created Successfully!');
     }
+
+    public function View(ClientForm $FormID)
+    {
+        return view('ClientForm.View', ['FormID' => $FormID]);
+    }
 }
