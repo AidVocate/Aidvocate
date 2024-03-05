@@ -29,3 +29,4 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout']);
 Route::get('/lnform',[ClientFormController::class, 'ClientFormView']);
 Route::post('/newclientform',[ClientFormController::class, 'AddClientForm']);
+Route::get('/viewclientform', [ViewFormController::class, 'index']);
