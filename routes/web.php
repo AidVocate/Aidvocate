@@ -31,5 +31,4 @@ Route::post('/logout', [AuthController::class, 'logout']);
 Route::get('/lnlist', [ListFormController::class, 'list'])->name('list');
 Route::get('/lnform', [ClientFormController::class, 'ClientFormView']);
 Route::post('/newclientform', [ClientFormController::class, 'AddClientForm']);
-Route::get('/viewclientform', [ViewFormController::class, 'index']);
 Route::get('viewlegalneed/{FormID}', [ClientFormController::class, 'View']);
