@@ -17,36 +17,48 @@ class ListFormController extends Controller
     //     return view('ListForm.ListLegalNeed', ['legalneed' => $legalneed]);
     // }
 
-        function list(Request $request)
+    function list(Request $request)
+    {
+        $search = $request->input('search');
+
+        // search and retrieve data
+
+        $data = ListForm::when($search, function ($query) use ($search) {
+            return $query->where('CourtNature', 'like', '%' .$search. '%');
+        })->get();
+
+        return view('ListForm.ListLegalNeed', ['data' => $data, 'search' => $search]);
+    }
+
+    public function search(Request $request)
+    {
+        $clientOutput="";
+        
+        $client=ListForm::
+        where('FirstName', 'Like', '%'.$request->search.'%')
+        ->orWhere('LastName', 'Like', '%'.$request->search.'%')
+        ->get();
+
+        foreach($client as $client)
         {
-            $search = $request->input('search');
-
-            // search and retrieve data
-
-            $data = ListForm::when($search, function ($query) use ($search) {
-                return $query->where('CourtNature', 'like', '%' .$search. '%');
-            })->get();
-
-            return view('ListForm.ListLegalNeed', ['data' => $data, 'search' => $search]);
+            $clientOutput.=
+            '<tr>
+                <td>'.$client->FirstName.'</td>
+            </tr>';
         }
 
-        public function search(Request $request)
-        {
-            $clientOutput="";
-            
-            $client=ListForm::
-            where('FirstName', 'Like', '%'.$request->search.'%')
-            ->orWhere('LastName', 'Like', '%'.$request->search.'%')
-            ->get();
+        return response($clientOutput);
+    }
+    function listjson(Request $request)
+    {
+        $search = $request->input('search');
+        // search and retrieve data
 
-            foreach($client as $client)
-            {
-                $clientOutput.=
-                '<tr>
-                    <td>'.$client->FirstName.'</td>
-                </tr>';
-            }
+        $data = ListForm::when($search, function ($query) use ($search) {
+            return $query->where('CourtNature', 'like', '%' .$search. '%');
+        })->get();
 
-            return response($clientOutput);
-        }
+        return response()->json($data);
+    }
+
 }
