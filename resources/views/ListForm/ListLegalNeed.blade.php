@@ -27,7 +27,7 @@
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="AllForms">
                 @foreach($data as $item)
                     <tr>
                         <td>{{$item['FirstName']}}</td>
@@ -43,7 +43,7 @@
                 @endforeach 
             </tbody>
 
-            <tbody id="Content">
+            <tbody id="Content" class="SearchForms">
             </tbody>
         </table>
     </div>

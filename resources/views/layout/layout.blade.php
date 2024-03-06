@@ -45,6 +45,18 @@
         $('#search').on('keyup', function()
         {
           $value=$(this).val();
+
+          if($value)
+          {
+            $('.AllForms').hide();
+            $('.SearchForms').show();
+          }
+          else
+          {
+            $('.AllForms').show();
+            $('.SearchForms').hide();
+          }
+
           $.ajax({
             type:'get',
             url:'{{URL::to('search')}}',

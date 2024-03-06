@@ -18,7 +18,8 @@ export default function Board() {
   useEffect(() => {
     axiosClient.get('/legalneedslist')
       .then(response => {
-        setBoardData(response.data);
+        setBoardData(Object.values(response.data));
+        console.log(response.data);
       })
       .catch(error => {
         console.error('Error fetching data:', error);

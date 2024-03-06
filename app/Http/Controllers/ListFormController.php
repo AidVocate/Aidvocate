@@ -44,11 +44,19 @@ class ListFormController extends Controller
             $clientOutput.=
             '<tr>
                 <td>'.$client->FirstName.'</td>
+                <td>'.$client->LastName.'</td>
+                <td>'.$client->CaseRole.'</td>
+                <td>'.$client->CourtDate.'</td>
+                <td>'.$client->CourtTime.'</td>
+                <td>'.$client->CaseDescription.'</td>
+                <td>
+                </td>
             </tr>';
         }
 
         return response($clientOutput);
     }
+
     function listjson(Request $request)
     {
         $search = $request->input('search');

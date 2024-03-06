@@ -34,4 +34,4 @@ Route::get('/lnform', [ClientFormController::class, 'ClientFormView']);
 Route::post('/newclientform', [ClientFormController::class, 'AddClientForm']);
 Route::get('viewlegalneed/{FormID}', [ClientFormController::class, 'View']);
 
-Route::get('/legalneedslist', [ListFormController::class, 'list']);
+Route::get('/legalneedslist', [ListFormController::class, 'listjson']);
