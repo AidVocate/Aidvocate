@@ -50,6 +50,9 @@ class ListFormController extends Controller
                 <td>'.$client->CourtTime.'</td>
                 <td>'.$client->CaseDescription.'</td>
                 <td>
+                '.'
+                <a href="/viewlegalneed/'.$client->FormID.'" class="btn btn-primary btn-sm">View</a>
+                '.'
                 </td>
             </tr>';
         }

@@ -16,10 +16,10 @@ export default function Board() {
   const [selected, setSelected] = useState<LegalNeedCardInterface | null>(null);
 
   useEffect(() => {
-    axiosClient.get('/legalneedslist')
+    axiosClient.get('http://localhost:8000/legalneedslist')
       .then(response => {
         setBoardData(Object.values(response.data));
-        console.log(response.data);
+        console.log(response);
       })
       .catch(error => {
         console.error('Error fetching data:', error);
