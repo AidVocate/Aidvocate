@@ -29,6 +29,7 @@ Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout']);
 Route::get('/lnlist', [ListFormController::class, 'list'])->name('list');
+Route::get('/search', [ListFormController::class, 'search']);
 Route::get('/lnform', [ClientFormController::class, 'ClientFormView']);
 Route::post('/newclientform', [ClientFormController::class, 'AddClientForm']);
 Route::get('viewlegalneed/{FormID}', [ClientFormController::class, 'View']);

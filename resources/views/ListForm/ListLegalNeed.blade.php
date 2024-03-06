@@ -9,7 +9,7 @@
 
     <form action="{{ route('list') }}" method="GET" class="mb-4">
         <div class="input-group mb-3">
-            <input type="text" class="form-control" name="search" value="{{ $search }}" placeholder="Case Nature..." aria-label="Case Nature">
+            <input type="text" class="form-control" name="search" id="search" value="{{ $search }}" placeholder="Case Nature..." aria-label="Case Nature">
             <button class="btn btn-outline-secondary" type="submit">Search</button>
         </div>
     </form>
@@ -42,8 +42,12 @@
                     </tr>
                 @endforeach 
             </tbody>
+
+            <tbody id="Content">
+            </tbody>
         </table>
     </div>
 </div>
 
 @endsection
+

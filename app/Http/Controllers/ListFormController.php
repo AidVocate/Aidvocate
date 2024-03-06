@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\ListForm;
+use App\Models\ClientForm;
 
 class ListFormController extends Controller
 {
@@ -27,5 +28,25 @@ class ListFormController extends Controller
             })->get();
 
             return view('ListForm.ListLegalNeed', ['data' => $data, 'search' => $search]);
+        }
+
+        public function search(Request $request)
+        {
+            $clientOutput="";
+            
+            $client=ListForm::
+            where('FirstName', 'Like', '%'.$request->search.'%')
+            ->orWhere('LastName', 'Like', '%'.$request->search.'%')
+            ->get();
+
+            foreach($client as $client)
+            {
+                $clientOutput.=
+                '<tr>
+                    <td>'.$client->FirstName.'</td>
+                </tr>';
+            }
+
+            return response($clientOutput);
         }
 }
