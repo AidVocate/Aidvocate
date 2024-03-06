@@ -2,18 +2,10 @@ import { Outlet }  from "react-router-dom";
 import Navigation from '../components/Navigation';
 
 export default function Layout() {
-  const backgroundImageUrl = 'url("/background.webp")';
   return (
-    <div
-        style={{
-          backgroundImage: backgroundImageUrl,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundAttachment: 'fixed',
-          minHeight: '100vh',
-          display: 'flex',
-          flexDirection: 'column',
-        }}
+    <div 
+        style={{backgroundImage: 'url("/background.webp")',}}
+        className="min-h-screen  flex flex-col fixed inset-0 overflow-y-auto bg-cover bg-center bg-fixed"
       >        
         <Navigation/>
         <Outlet/>

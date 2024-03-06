@@ -3,6 +3,7 @@ import DefaultLayout from './layouts/DefaultLayout';
 import UserRoute from './routes/UserRoute'
 import Index from './pages/Index';
 import NoPage from './pages/NoPage';
+import Board from './pages/Board';
 
 const router = createBrowserRouter([{
   path: '/',
@@ -25,6 +26,13 @@ const router = createBrowserRouter([{
       element: 
       <UserRoute>
         <Index/>
+      </UserRoute>
+    },
+    {
+      path: '/board',
+      element: 
+      <UserRoute>
+        <Board/>
       </UserRoute>
     },
   ]
