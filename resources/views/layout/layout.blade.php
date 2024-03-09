@@ -44,7 +44,7 @@
       <script type="text/javascript">
         $('#search').on('keyup', function()
         {
-          $value=$(this).val();
+          $value=$(this).val().trim();
 
           if($value)
           {
