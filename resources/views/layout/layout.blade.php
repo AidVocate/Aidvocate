@@ -17,9 +17,21 @@
         </a>
   
         <ul class="nav nav-pills">
+          @auth
           <li class="nav-item"><a href="/" class="nav-link" aria-current="page">Home</a></li>
           <li class="nav-item"><a href="/lnform" class="nav-link">Create Legal Need</a></li>
           <li class="nav-item"><a href="/lnlist" class="nav-link">Legal Need List</a></li>
+          <li>
+            <form class="inline" method="POST" action="/logout">
+              @csrf
+              <button type="submit">
+               <i class="fa-solid fa-door-closed"></i> Logout   
+              </button>
+              </form>
+          </li>
+            @else
+           <h1>not login</h1>
+            @endauth
         </ul>
       </header>
 

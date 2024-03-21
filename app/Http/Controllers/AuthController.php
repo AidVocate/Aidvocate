@@ -21,9 +21,16 @@ class AuthController extends Controller
     public function store(Request $request){
         // dd($request->all());
     $formFields = $request->validate([
-        'username' => ['required', 'min:3', Rule::unique('accounts', 'username')],
+        'Email' => ['required', 'min:3', Rule::unique('accounts', 'Email')],
         'password' => 'required|confirmed|min:6',
         'role' => 'required',
+        'FirstName' => 'required',
+        'LastName' => 'required',
+        'Phone' => 'required',
+        'Address' => 'required',
+        'City' => 'required',
+        'PostalCode' => 'required',
+        'Province' => 'required',
     ]);
 
     $formFields['password'] = bcrypt($formFields['password']);
@@ -42,14 +49,19 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        $credentials = $request->only('username', 'password');
+        $credentials = $request->only('Email', 'password');
 
         if (Auth::attempt($credentials)) {
             // Authentication passed...
-            return redirect()->intended('/home'); // Redirect to a dashboard or home page
+            return redirect()->intended('/testlogin'); // Redirect to a dashboard or home page
         }
 
-        return back()->withErrors(['message' => 'Invalid username or password'])->withInput();
+        return back()->withErrors(['message' => 'Invalid Email or password'])->withInput();
+    }
+
+    public function testLogin()
+    {
+        return view ('auth.testinglogin');
     }
 
     //logout

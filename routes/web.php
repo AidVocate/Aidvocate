@@ -35,3 +35,4 @@ Route::post('/newclientform', [ClientFormController::class, 'AddClientForm']);
 Route::get('viewlegalneed/{FormID}', [ClientFormController::class, 'View']);
 
 Route::get('/legalneedslist', [ListFormController::class, 'listjson']);
+Route::get('/testlogin',[AuthController::class, 'testLogin'])->middleware(['auth', 'PBO']);

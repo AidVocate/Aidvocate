@@ -14,9 +14,17 @@ class Account extends Authenticatable
     protected $table = 'accounts';
 
     protected $fillable = [
-        'username',
+        'Email',
         'password',
+        'FirstName',
+        'LastName',
+        'Phone',
+        'Address',
+        'City',
+        'PostalCode',
+        'Province',
         'role',
+
     ];
 
     protected $hidden = [
@@ -26,6 +34,6 @@ class Account extends Authenticatable
 
     public function getAuthIdentifierName()
     {
-        return 'username';
+        return 'Email';
     }
 }

@@ -4,8 +4,8 @@
     @csrf
 
     <div>
-        <label for="username">{{ __('Username') }}</label>
-        <input id="username" type="text" name="username" value="{{ old('username') }}" required autofocus>
+        <label for="Email">{{ __('Email') }}</label>
+        <input id="Email" type="text" name="Email" value="{{ old('Email') }}" required autofocus>
     </div>
 
     <div>
