@@ -15,12 +15,6 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $user = auth()->user();
-
-        if ($user && $user->role === 'Admin') {
-            return $next($request);
-        }
-
-        return redirect('/')->with('error', 'You do not have permission to access this page');
+        return $next($request);
     }
 }
