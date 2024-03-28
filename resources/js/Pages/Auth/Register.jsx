@@ -204,11 +204,10 @@ export default function Register() {
                         id="VoiceMail"
                         name="VoiceMail"
                         checked={data.VoiceMail} // Use checked instead of value
-                        className="mt-1 block w-full"
+                        className="mt-1"
                         autoComplete="VoiceMail"
                         isFocused={true}
                         onChange={(e) => setData('VoiceMail', e.target.checked)} // Use e.target.checked
-                        required
                     />
 
                     <InputError message={errors.VoiceMail} className="mt-2" />

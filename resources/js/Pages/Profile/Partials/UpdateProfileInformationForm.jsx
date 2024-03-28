@@ -20,7 +20,6 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
         VoiceMail: user.VoiceMail,
         email: user.email,
         Phone: user.Phone,
-        Role: user.Role,
     });
 
     const submit = (e) => {
@@ -202,20 +201,20 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                     <InputError className="mt-2" message={errors.Phone} />
                 </div>
 
-
-                <div>
+                <div className="mt-4">
                     <InputLabel htmlFor="VoiceMail" value="Voice Mail" />
 
                     <Checkbox
                         id="VoiceMail"
+                        name="VoiceMail"
+                        checked={data.VoiceMail} // Use checked instead of value
                         className="mt-1"
-                        value={data.VoiceMail}
-                        onChange={(e) => setData('VoiceMail', e.target.value)}
-                        isFocused
                         autoComplete="VoiceMail"
+                        isFocused={true}
+                        onChange={(e) => setData('VoiceMail', e.target.checked)} // Use e.target.checked
                     />
 
-                    <InputError className="mt-2" message={errors.VoiceMail} />
+                    <InputError message={errors.VoiceMail} className="mt-2" />
                 </div>
 
                
