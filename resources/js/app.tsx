@@ -4,9 +4,27 @@ import '../css/app.css';
 import { createRoot } from 'react-dom/client';
 import { createInertiaApp } from '@inertiajs/react';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
-import { StyledEngineProvider } from '@mui/material/styles';
+import { StyledEngineProvider, ThemeProvider, createTheme } from '@mui/material';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
+
+const theme = createTheme({
+    palette: {
+        primary: {
+            main: '#17234a',
+        },
+        secondary: {
+            main: '#2cacd4',
+        },
+    },
+    typography: {
+        fontFamily: [
+            'Figtree', 
+            'Arial', 
+            'sans-serif'
+        ].join(','),
+    },
+  });
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
@@ -15,7 +33,9 @@ createInertiaApp({
         const root = createRoot(el);
         root.render(
             <StyledEngineProvider injectFirst>
-                <App {...props} />
+                <ThemeProvider theme={theme}>
+                    <App {...props} />
+                </ThemeProvider>
             </StyledEngineProvider>
         );
     },

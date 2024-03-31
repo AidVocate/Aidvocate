@@ -1,11 +1,12 @@
-interface Props extends ClassName {
-    disabled: boolean
+interface Props extends ClassName, AnyProps {
+    checked?: boolean
 }
 
-export default function Checkbox({ className = '', disabled }: Props) {
+export default function Checkbox({className = '', checked, ...props}: Props) {
     return (
         <input
-            disabled={disabled}
+            {...props}
+            checked={checked}
             type="checkbox"
             className={
                 'rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500 ' +

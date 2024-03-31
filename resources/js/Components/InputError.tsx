@@ -1,4 +1,4 @@
-interface Props extends ClassName {
+interface Props extends ClassName, AnyProps {
     message?: string;
 }
 

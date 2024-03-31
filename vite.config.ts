@@ -1,6 +1,8 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import react from '@vitejs/plugin-react';
+import autoprefixer from 'autoprefixer';
+import tailwindcss from 'tailwindcss';
 
 export default defineConfig({
     build: {
@@ -17,4 +19,12 @@ export default defineConfig({
         }),
         react(),
     ],
+    css: {
+        postcss: {
+            plugins: [
+                tailwindcss,
+                autoprefixer,
+            ],
+        },
+    },
 });

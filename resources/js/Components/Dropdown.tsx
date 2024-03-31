@@ -4,7 +4,7 @@ import { Method } from '@inertiajs/core';
 import { Transition } from '@headlessui/react';
 
 
-/* Interfaces for Component */
+/* Interfaces */
 
 interface Context {
     open: boolean;

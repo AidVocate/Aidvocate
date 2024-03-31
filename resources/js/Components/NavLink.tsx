@@ -5,11 +5,10 @@ interface Props extends Children, ClassName {
     href: string;
 }
 
-export default function NavLink({ href, active = false, className = '', children, ...props }: Props) {
+export default function NavLink({ href, active = false, className = '', children}: Props) {
     return (
         <Link
             href={href}
-            {...props}
             className={
                 'inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium leading-5 transition duration-150 ease-in-out focus:outline-none ' +
                 (active

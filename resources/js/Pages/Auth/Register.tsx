@@ -17,7 +17,7 @@ export default function Register() {
         Province: '',
         PostalCode: '',
         Phone: '',
-        VoiceMail: '',
+        VoiceMail: false,
         email: '',
         password: '',
         password_confirmation: '',
