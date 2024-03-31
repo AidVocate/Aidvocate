@@ -10,6 +10,7 @@ export default {
         "./resources/js/**/*.{js,jsx,ts,tsx}",
     ],
 
+    /*
     theme: {
         extend: {
             fontFamily: {
@@ -17,12 +18,11 @@ export default {
             },
         },
     },
-    
-    /*
-    corePlugins: {
-        preflight: true,
-    },
     */
+   
+    corePlugins: {
+        preflight: false,
+    },
 
     plugins: [forms],
 };
