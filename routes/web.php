@@ -81,4 +81,9 @@ Route::middleware(['auth', RoleMiddleware::class . ':PBO'])->group(function () {
 });
 
 
+//404
+Route::get('/{any}', function () {
+    abort(404);
+})->where('any', '.*');
+
 require __DIR__.'/auth.php';
