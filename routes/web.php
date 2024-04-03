@@ -13,6 +13,8 @@ use Tests\Feature\Auth\EmailVerificationTest;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Middleware\RoleMiddleware;
 
+require __DIR__.'/auth.php';
+
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -81,4 +83,8 @@ Route::middleware(['auth', RoleMiddleware::class . ':PBO'])->group(function () {
 });
 
 
-require __DIR__.'/auth.php';
+//404
+Route::get('/{any}', function () {
+    abort(404);
+})->where('any', '.*');
+
