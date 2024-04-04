@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class LegalRepresentation extends Model
 {
-    protected $table = 'legal_representations';
+    protected $table = 'LegalRepresentations';
 
     protected $fillable = [
         'id', // Assuming you want to allow mass assignment for the 'id' column
