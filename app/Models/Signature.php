@@ -12,15 +12,15 @@ class Signature extends Model
     protected $table = 'Signature';
 
     protected $fillable = [
-        'id', // Assuming you want to allow mass assignment for the 'id' column
+        'CaseID', // Assuming you want to allow mass assignment for the 'id' column
         'Signature',
         'PrintName',
         'SignDate',
     ];
 
     // Define any relationships if needed
-    public function user()
+    public function caseModel()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(CaseModel::class, 'CaseID');
     }
 }

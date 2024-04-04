@@ -11,16 +11,18 @@ class CaseQuestions extends Model
 
     protected $table = 'CaseQuestions';
 
+    protected $primaryKey = 'QuestionID';
+
     protected $fillable = [
-        'caseID',     // Assuming you want to allow mass assignment for the 'caseID' column
-        'question1',
-        'question2',
-        'question3',
+        'CaseID',     // Assuming you want to allow mass assignment for the 'caseID' column
+        'Question1',
+        'Question2',
+        'Question3',
     ];
 
     // Define the relationship with the case table
-    public function case()
+    public function caseModel()
     {
-        return $this->belongsTo(CaseModel::class, 'caseID');
+        return $this->belongsTo(CaseModel::class, 'CaseID');
     }
 }
