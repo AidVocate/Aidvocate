@@ -6,7 +6,7 @@ import { createInertiaApp } from '@inertiajs/react';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { StyledEngineProvider, ThemeProvider, createTheme } from '@mui/material';
 
-const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
+const appName = import.meta.env.VITE_APP_NAME || 'AdvocAid';
 
 const theme = createTheme({
     palette: {
@@ -27,7 +27,7 @@ const theme = createTheme({
   });
 
 createInertiaApp({
-    title: (title) => `${title} - ${appName}`,
+    title: (title) => `${appName} - ${title}`,
     resolve: (name) => resolvePageComponent(`./Pages/${name}.tsx`, import.meta.glob('./Pages/**/*.tsx')),
     setup({ el, App, props }) {
         const root = createRoot(el);
