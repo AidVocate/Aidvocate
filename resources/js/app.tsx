@@ -5,11 +5,15 @@ import { createRoot } from 'react-dom/client';
 import { createInertiaApp } from '@inertiajs/react';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { StyledEngineProvider, ThemeProvider, createTheme } from '@mui/material';
+import CssBaseline from "@mui/material/CssBaseline";
 
 const appName = import.meta.env.VITE_APP_NAME || 'AdvocAid';
 
 const theme = createTheme({
     palette: {
+        background: {
+            default: '#E5E7EB', // default background color gray-200
+        },
         primary: {
             main: '#17234a',
         },
@@ -34,6 +38,7 @@ createInertiaApp({
         root.render(
             <StyledEngineProvider injectFirst>
                 <ThemeProvider theme={theme}>
+                    <CssBaseline />
                     <App {...props} />
                 </ThemeProvider>
             </StyledEngineProvider>
