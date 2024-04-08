@@ -1,15 +1,15 @@
 import './bootstrap';
 import '../css/app.css';
-
+import CssBaseline from "@mui/material/CssBaseline";
 import { createRoot } from 'react-dom/client';
 import { createInertiaApp } from '@inertiajs/react';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
-import { StyledEngineProvider, ThemeProvider, createTheme } from '@mui/material';
-import CssBaseline from "@mui/material/CssBaseline";
+import { StyledEngineProvider, ThemeProvider, createTheme, responsiveFontSizes } from '@mui/material';
+
 
 const appName = import.meta.env.VITE_APP_NAME || 'AdvocAid';
 
-const theme = createTheme({
+const theme = responsiveFontSizes(createTheme({
     palette: {
         background: {
             default: '#E5E7EB', // default background color gray-200
@@ -28,7 +28,7 @@ const theme = createTheme({
             'sans-serif'
         ].join(','),
     },
-  });
+}));
 
 createInertiaApp({
     title: (title) => `${appName} - ${title}`,

@@ -15,14 +15,13 @@ import Background from '@/Components/Background';
 import NavBar from '@/Components/NavBar';
 
 interface InfoCardProps extends Children, ClassName {
-    height: number;
     flex?: boolean;
 }
-function InfoCard({children, className, height, flex}: InfoCardProps) {
+function InfoCard({children, className, flex}: InfoCardProps) {
     return (
         <Card className={className}>
             <CardActionArea>
-                <CardContent className={`min-h-${height} ${flex ? "flex justify-between" : null}`}>
+                <CardContent className={`lg:min-h-40 xl:min-h-36  ${flex ? "flex justify-between" : null}`}>
                     {children}
                 </CardContent>
             </CardActionArea>
@@ -59,13 +58,13 @@ export default function Welcome({ auth }: Props) {
                 </Typography>
             </Container>
             <div className="bg-gray-200">
-                <main className="mt-3 flex items-center justify-center">
-                    <Grid maxWidth="xl" className="my-6 px-5" container spacing={{ md: 1, lg: 2 }}>
-                        <Grid item className="my-1" lg={6}>
+                <main className="mt-3 flex items-center justify-content">
+                    <Grid maxWidth="xl" className="my-6 px-5 mx-auto" container spacing={{ md: 1, lg: 2 }}>
+                        <Grid item className="my-1 ml-auto" lg={6}>
                             <Typography variant="h4" fontWeight="bold" className="mb-2" color="primary">
                                 Why AdvocAid
                             </Typography>
-                            <InfoCard flex={true} height={32}>
+                            <InfoCard flex={true}>
                                 <BusinessCenterSharpIcon
                                     className="mt-1 p-3 rounded-lg w-12 h-12"
                                     sx={{
@@ -84,7 +83,7 @@ export default function Welcome({ auth }: Props) {
                                     </Typography>
                                 </div>
                             </InfoCard>
-                            <InfoCard flex={true} height={32} className="mt-5">
+                            <InfoCard flex={true}className="mt-5">
                                 <PersonOutlineSharpIcon
                                     className="mt-1 p-3 rounded-lg w-12 h-12"
                                     sx={{
@@ -102,7 +101,7 @@ export default function Welcome({ auth }: Props) {
                                     </Typography>
                                 </div>
                             </InfoCard>
-                            <InfoCard flex={true} height={36} className="mt-5">
+                            <InfoCard flex={true} className="mt-5">
                                 <HandshakeSharpIcon
                                     className="mt-1 p-3 rounded-lg w-12 h-12"
                                     sx={{
@@ -133,11 +132,11 @@ export default function Welcome({ auth }: Props) {
                                 <Divider className="mt-2" />
                             </div>
                         </Grid>
-                        <Grid item className="my-1" lg={6}>
+                        <Grid item className="my-1 mr-auto" lg={6}>
                             <Typography variant="h4" fontWeight="bold" className="mb-2" color="primary">
                                 Key Benefits
                             </Typography>
-                            <InfoCard height={32}>
+                            <InfoCard>
                                 <Typography className="p-1" gutterBottom variant="h5" component="div" sx={{
                                     color: "white",
                                     bgcolor: theme.palette.primary.main
@@ -149,7 +148,7 @@ export default function Welcome({ auth }: Props) {
                                     This approach serves the goal of making justice more accessible and efficient. 
                                 </Typography>
                             </InfoCard>
-                            <InfoCard height={32} className="mt-5">
+                            <InfoCard className="mt-5">
                                 <Typography className="p-1" gutterBottom variant="h5" component="div" sx={{
                                     color: "white",
                                     bgcolor: theme.palette.primary.main
@@ -161,7 +160,7 @@ export default function Welcome({ auth }: Props) {
                                     and simplified reporting, allowing them to focus on delivering quality legal services. 
                                 </Typography>
                             </InfoCard>
-                            <InfoCard height={36} className="mt-5">
+                            <InfoCard className="mt-5">
                                 <Typography className="p-1" gutterBottom variant="h5" component="div" sx={{
                                     color: "white",
                                     bgcolor: theme.palette.primary.main
