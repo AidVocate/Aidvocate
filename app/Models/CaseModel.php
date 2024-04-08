@@ -19,6 +19,8 @@ class CaseModel extends Model
         'CourtDocuments',
         'ServicesLanguage',
         'AdditionalInformation',
+        'Approved',
+        'AssignedID'
     ];
 
     // Define the relationship with CaseQuestions
