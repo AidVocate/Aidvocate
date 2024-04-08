@@ -11,6 +11,7 @@ class CaseModel extends Model
 
     protected $table = 'Case';
 
+    protected $primaryKey = 'CaseID';
 
     protected $fillable = [
         'id',
@@ -19,6 +20,8 @@ class CaseModel extends Model
         'CourtDocuments',
         'ServicesLanguage',
         'AdditionalInformation',
+        'Approved',
+        'AssignedID',
     ];
 
     // Define the relationship with CaseQuestions

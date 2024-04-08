@@ -28,12 +28,12 @@ class PBOController extends Controller
 
     public function show($CaseID)
     {
-    // Retrieve the case by its ID
-    $case = CaseModel::findOrFail($CaseID);
+        // Retrieve the case by its ID
+        $case = CaseModel::findOrFail($CaseID);
 
-    // Return the view with the case data
-    return Intertia::render('PBO/TestLegalNeed', [
-        'case' => $case,
-    ]);
+        // Return the view with the case data
+        return inertia('PBO/TestLegalNeed', [
+            'case' => $case,
+        ]);
     }
 }

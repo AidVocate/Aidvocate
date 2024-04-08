@@ -14,8 +14,6 @@ const ShowCase: React.FC<Props> = ({ case: caseData }) => {
             <p><strong>Nature of Appearance:</strong> {caseData.NatureOfAppearance}</p>
             <p><strong>Services Language:</strong> {caseData.ServicesLanguage}</p>
             <p><strong>Additional Information:</strong> {caseData.AdditionalInformation}</p>
-            {/* Add more case details as needed */}
-            <Link href={route('cases.index')} className="text-blue-500">Back to Case List</Link>
         </div>
     );
 };
