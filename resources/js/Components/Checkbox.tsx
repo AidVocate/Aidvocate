@@ -12,6 +12,10 @@ export default function Checkbox({className = '', checked, ...props}: Props) {
                 'rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500 ' +
                 className
             }
+            style={{
+                border: '1px solid grey',
+                borderRadius: '0.375rem'
+            }}
         />
     );
 }
