@@ -66,6 +66,8 @@ Route::middleware(['auth', RoleMiddleware::class . ':Admin'])->group(function ()
 
 Route::middleware(['auth', RoleMiddleware::class . ':Client'])->group(function () {
     Route::get('/client', [ClientController::class, 'index']);
+    Route::get('/client/CreateLegalNeed', [ClientController::class, 'ViewLegalNeedForm']);
+    Route::post('/client/CreateLegalNeed', [ClientController::class, 'AddLegalNeed'])->name('createLegalNeed');
     // Other user routes...
 });
 
