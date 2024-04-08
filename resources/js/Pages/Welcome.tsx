@@ -2,12 +2,6 @@ import { Head } from '@inertiajs/react';
 import { useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Background from '@/Components/Background';
-import Icon from '@/Components/Icon';
-import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -16,7 +10,9 @@ import { CardActionArea } from '@mui/material';
 import BusinessCenterSharpIcon from '@mui/icons-material/BusinessCenterSharp';
 import PersonOutlineSharpIcon from '@mui/icons-material/PersonOutlineSharp';
 import HandshakeSharpIcon from '@mui/icons-material/HandshakeSharp';
-
+import Footer from '@/Components/Footer';
+import Background from '@/Components/Background';
+import NavBar from '@/Components/NavBar';
 
 interface InfoCardProps extends Children, ClassName {
     height: number;
@@ -38,47 +34,20 @@ interface Props extends inertia.Auth {
     laravelVersion: string;
     phpVersion: string;
 }
-export default function Welcome({ auth, laravelVersion, phpVersion }: Props) {
+//(auth, laravelVersion, phpVersion) 
+export default function Welcome({ auth }: Props) {
     const theme = useTheme();
     return (
         <Background>
             <Head title="Welcome" />
-            <AppBar>
-                <Toolbar variant="dense" className="flex justify-between items-center">
-                    <IconButton edge="start" color="inherit" aria-label="menu" className="mr-2">
-                        <Icon size={40}/>
-                        <Typography variant="h6" color="inherit" className="ml-2" component="div">
-                            ADVOCAID
-                        </Typography>
-                    </IconButton>
-                    <nav className="-mx-3 flex flex-1 justify-end">
-                        {auth.user ? (
-                            <Link
-                                href={route('dashboard')}
-                                className="text-white"
-                            >
-                                Dashboard
-                            </Link>
-                        ) : (<>
-                            <Link
-                                href={route('login')}
-                                className="rounded-md px-3 py-2 text-white"
-                            >
-                                Log in
-                            </Link>
-                            <Link
-                                href={route('register')}
-                                className="rounded-md px-3 py-2 text-white"
-                            >
-                                Register
-                            </Link>
-                        </>)}
-                    </nav>   
-                </Toolbar>
-            </AppBar>
-            <Container maxWidth="xl" className="text-white text-center mt-20 mb-40">
-                <img src='/advocaid.webp' alt="Logo" className="w-96 h-auto mb-20 mx-auto" />
-                <Typography variant="h1" gutterBottom>
+            <NavBar routes={auth.user ? ([
+                ["Dashboard", "dashboard"],
+            ]) : ([
+                ["Login", "login"], 
+                ["Register", "register"]
+            ])}/>
+            <Container maxWidth="xl" className="text-white text-center mt-20 mb-40"> 
+                <Typography className="mt-20" variant="h1" gutterBottom>
                     Unlocking Justice
                 </Typography>
                 <Typography variant="h2" paragraph color="secondary">
@@ -207,24 +176,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }: Props) {
                         </Grid>
                     </Grid>
                 </main>
-                <footer className="py-16 text-center text-sm text-black dark:text-white/70">
-                    <Typography variant="body2" color="text.secondary">
-                        {'Copyright © '}
-                        <Link color="inherit" href="https://www.gozaround.com/">
-                            GozAround Inc
-                        </Link>{' '}
-                        {new Date().getFullYear()}
-                        {'.'}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                        <Link className="mx-1" color="inherit" href="tel:+ 1-888-472-0290">
-                            + 1-888-472-0290
-                        </Link>
-                        <Link className="mx-1" color="inherit" href="mailto:info@gozaround.com">
-                            info@gozaround.com
-                        </Link>
-                    </Typography>
-                </footer>
+                <Footer/>
             </div>
         </Background>
     );
