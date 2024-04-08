@@ -12,4 +12,16 @@ class PBOController extends Controller
     {
         return Inertia::render('PBO/Index');
     }
+
+    public function ViewLegalNeedBoard()
+    {
+        $users = \App\Models\User::all();
+        $cases = \App\Models\CaseModel::all();
+
+
+        return Inertia::render('PBO/ViewLegalNeedBoard', [
+            'users' => $users,
+            'cases' => $cases
+        ]);
+    }
 }
