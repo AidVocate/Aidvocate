@@ -4,6 +4,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
 import { Link } from '@inertiajs/react';
 
 interface RouteInfo {
@@ -21,12 +22,12 @@ export default function NavBar({ routes }: Props) {
     <AppBar>
       <Toolbar variant="dense" className="flex items-center justify-center">
           <Container className="max-w-screen-xl mx-auto flex">
-            <IconButton href='/' className="mr-5" edge="start" color="inherit" aria-label="menu">
+            <Button href='/'variant="text" color='secondary'>
               <Icon size={40}/>
-              <Typography variant="h6" color="inherit" className="ml-2" component="div">
-                  ADVOCAID
+              <Typography variant="h6" color="white" className="ml-2" component="div">
+                ADVOCAID
               </Typography>
-            </IconButton>
+            </Button>
             <nav className="my-auto flex flex-1 justify-end">
               {routes && routes.map((routeInfo) => (
                 <Link
