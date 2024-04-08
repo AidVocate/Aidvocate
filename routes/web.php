@@ -13,6 +13,8 @@ use Tests\Feature\Auth\EmailVerificationTest;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Middleware\RoleMiddleware;
 
+require __DIR__.'/auth.php';
+
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -64,6 +66,8 @@ Route::middleware(['auth', RoleMiddleware::class . ':Admin'])->group(function ()
 
 Route::middleware(['auth', RoleMiddleware::class . ':Client'])->group(function () {
     Route::get('/client', [ClientController::class, 'index']);
+    Route::get('/client/CreateLegalNeed', [ClientController::class, 'ViewLegalNeedForm']);
+    Route::post('/client/CreateLegalNeed', [ClientController::class, 'AddLegalNeed'])->name('createLegalNeed');
     // Other user routes...
 });
 
@@ -81,4 +85,8 @@ Route::middleware(['auth', RoleMiddleware::class . ':PBO'])->group(function () {
 });
 
 
-require __DIR__.'/auth.php';
+//404
+Route::get('/{any}', function () {
+    abort(404);
+})->where('any', '.*');
+
