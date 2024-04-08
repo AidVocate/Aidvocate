@@ -41,12 +41,12 @@ export default function Welcome({ auth }: Props) {
         <Background>
             <Head title="Welcome" />
             <NavBar routes={auth.user ? ([
-                ["Dashboard", "dashboard"],
+                {name: "Dashboard", route: "dashboard"},
             ]) : ([
-                ["Login", "login"], 
-                ["Register", "register"]
+                {name: "Login", route: "login"},
+                {name: "Register", route: "register"}
             ])}/>
-            <Container maxWidth="xl" className="text-white text-center mt-20 mb-40"> 
+            <Container maxWidth="xl" className="text-white text-center mb-40"> 
                 <Typography className="mt-20" variant="h1" gutterBottom>
                     Unlocking Justice
                 </Typography>
@@ -65,7 +65,7 @@ export default function Welcome({ auth }: Props) {
                             <Typography variant="h4" fontWeight="bold" className="mb-2" color="primary">
                                 Why AdvocAid
                             </Typography>
-                            <InfoCard flex={true} height={24}>
+                            <InfoCard flex={true} height={32}>
                                 <BusinessCenterSharpIcon
                                     className="mt-1 p-3 rounded-lg w-12 h-12"
                                     sx={{
@@ -84,7 +84,7 @@ export default function Welcome({ auth }: Props) {
                                     </Typography>
                                 </div>
                             </InfoCard>
-                            <InfoCard flex={true} height={28} className="mt-5">
+                            <InfoCard flex={true} height={32} className="mt-5">
                                 <PersonOutlineSharpIcon
                                     className="mt-1 p-3 rounded-lg w-12 h-12"
                                     sx={{
@@ -97,12 +97,12 @@ export default function Welcome({ auth }: Props) {
                                         User-Friendly Experience for the Public
                                     </Typography>
                                     <Typography variant="body2" color="text.secondary">
-                                        AdvocAid simplifies the process of seeking legal help. Users undergo a brief, AI-dirven interview
+                                        AdvocAid simplifies the process of seeking legal help. Users undergo a brief, AI-driven interview
                                         to identify their specific legal needs, ensuring accurate matching with suitable pro bono programs.
                                     </Typography>
                                 </div>
                             </InfoCard>
-                            <InfoCard flex={true} height={28} className="mt-5">
+                            <InfoCard flex={true} height={36} className="mt-5">
                                 <HandshakeSharpIcon
                                     className="mt-1 p-3 rounded-lg w-12 h-12"
                                     sx={{
@@ -137,7 +137,7 @@ export default function Welcome({ auth }: Props) {
                             <Typography variant="h4" fontWeight="bold" className="mb-2" color="primary">
                                 Key Benefits
                             </Typography>
-                            <InfoCard height={24}>
+                            <InfoCard height={32}>
                                 <Typography className="p-1" gutterBottom variant="h5" component="div" sx={{
                                     color: "white",
                                     bgcolor: theme.palette.primary.main
@@ -149,7 +149,7 @@ export default function Welcome({ auth }: Props) {
                                     This approach serves the goal of making justice more accessible and efficient. 
                                 </Typography>
                             </InfoCard>
-                            <InfoCard height={28} className="mt-5">
+                            <InfoCard height={32} className="mt-5">
                                 <Typography className="p-1" gutterBottom variant="h5" component="div" sx={{
                                     color: "white",
                                     bgcolor: theme.palette.primary.main
@@ -161,7 +161,7 @@ export default function Welcome({ auth }: Props) {
                                     and simplified reporting, allowing them to focus on delivering quality legal services. 
                                 </Typography>
                             </InfoCard>
-                            <InfoCard height={28} className="mt-5">
+                            <InfoCard height={36} className="mt-5">
                                 <Typography className="p-1" gutterBottom variant="h5" component="div" sx={{
                                     color: "white",
                                     bgcolor: theme.palette.primary.main
