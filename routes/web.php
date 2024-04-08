@@ -81,6 +81,10 @@ Route::middleware(['auth', RoleMiddleware::class . ':Lawyer'])->group(function (
 
 Route::middleware(['auth', RoleMiddleware::class . ':PBO'])->group(function () {
     Route::get('/pbo', [PBOController::class, 'index']);
+    Route::get('/pbo/ViewLegalNeed', [PBOController::class, 'ViewLegalNeedForm']);
+    Route::get('/PBO/TestLegalNeed/{CaseID}', [PBOController::class, 'show'])->name('cases.show');
+
+    // Post for update/public legal need?
     // Other user routes...
 });
 
