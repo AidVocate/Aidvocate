@@ -74,15 +74,17 @@ Route::middleware(['auth', RoleMiddleware::class . ':Client'])->group(function (
 //Lawyer
 Route::middleware(['auth', RoleMiddleware::class . ':Lawyer'])->group(function () {
     Route::get('/lawyer', [LawyerController::class, 'index']);
+    Route::get('/lawyer/ViewLegalNeedBoard', [LawyerController::class, 'CaseList'])->name('cases.index');
     Route::get('/lawyer/SubmitsOffer', [LawyerController::class, 'submitsOffer']);
     Route::post('/lawyer/SubmitsOffer/{case}', [LawyerController::class, 'grabCase'])->name('cases.grab');
-
 });
 
 //PBO
 
 Route::middleware(['auth', RoleMiddleware::class . ':PBO'])->group(function () {
     Route::get('/pbo', [PBOController::class, 'index']);
+    Route::get('/pbo/ViewLegalNeedBoard', [PBOController::class, 'CaseList'])->name('cases.index');
+
     // Other user routes...
 });
 
