@@ -76,7 +76,9 @@ Route::middleware(['auth', RoleMiddleware::class . ':Lawyer'])->group(function (
     Route::get('/lawyer', [LawyerController::class, 'index']);
     Route::get('/lawyer/ViewLegalNeedBoard', [LawyerController::class, 'CaseList'])->name('cases.index');
     Route::get('/lawyer/SubmitsOffer', [LawyerController::class, 'submitsOffer']);
-    Route::post('/lawyer/SubmitsOffer/{case}', [LawyerController::class, 'grabCase'])->name('cases.grab');
+    Route::post('/lawyer/SubmitsOffer/{CaseID}', [LawyerController::class, 'grabCase'])->name('cases.grab');
+    Route::get('/lawyer/SubmitsOffer/{CaseID}', [LawyerController::class, 'ViewLegalNeed']);
+
 });
 
 //PBO

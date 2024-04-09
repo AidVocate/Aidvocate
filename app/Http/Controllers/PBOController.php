@@ -12,7 +12,6 @@ use App\Models\LegalRepresentation;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-use App\Models\CaseModel;
 
 class PBOController extends Controller
 {
@@ -33,8 +32,11 @@ class PBOController extends Controller
         $case = CaseModel::findOrFail($CaseID);
 
         // Return the view with the case data
-        return inertia('PBO/TestLegalNeed', [
+        return Inertia::render('PBO/TestLegalNeed', [
             'case' => $case,
+        ]);
+    }
+    
     public function CaseList()
     {
         // Retrieve all cases that are not approved

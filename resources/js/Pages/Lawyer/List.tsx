@@ -20,7 +20,7 @@ const ApprovedList: React.FC<Props> = ({ cases }) => {
     }
   
     const navigateToDifferentPage = (caseID: number) => {
-      window.location.href = `/lawyer/ViewLegalNeed/${caseID}`;
+      window.location.href = `/lawyer/SubmitsOffer/${caseID}`;
     };
 
     return (

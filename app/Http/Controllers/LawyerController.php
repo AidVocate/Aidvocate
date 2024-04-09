@@ -7,7 +7,7 @@ use App\Models\CaseModel;
 use Illuminate\Http\Request;
 use App\Models\AssignedLawyer;
 use App\Http\Controllers\Controller;
-use App\Models\CaseModel;
+use Illuminate\Support\Facades\Auth;
 
 
 class LawyerController extends Controller
@@ -28,34 +28,45 @@ class LawyerController extends Controller
         ]);
     }
 
+    public function ViewLegalNeed($CaseID)
+    {
+        // Retrieve the case by its ID
+        $case = CaseModel::findOrFail($CaseID);
+
+        // Return the view with the case data
+        return Inertia::render('Lawyer/SubmitsOffer', [
+            'case' => $case,
+        ]);
+    }
+
     public function submitsOffer()
     {
         return Inertia::render('Lawyer/SubmitsOffer');
     }
 
-    public function grabCase(Request $request, $CaseID) // Change $request to $CaseID
-{
-    // Find the case by its ID
-    $case = CaseModel::findOrFail($CaseID);
+    // Controller Method to Grab Case
+    // Controller Method to Grab Case
+    public function grabCase($CaseID)
+    {
+        // Find the case by its ID
+        $case = CaseModel::findOrFail($CaseID);
 
-    // Check if the case is already assigned to a lawyer
-    if ($case->AssignedID !== null) {
-        return redirect()->back()->with('error', 'This case is already assigned to a lawyer.');
-    }
+        // Check if the case is already assigned to a lawyer
+        if ($case->AssignedID !== null) {
+            return redirect()->back()->with('error', 'This case is already assigned to a lawyer.');
+        }
+        $assignedLawyerId = Auth::id();
 
-    // Get the currently authenticated user (assuming the lawyer is logged in)
-    $assignedLawyerId = auth()->user()->id;
-
-    // Update the AssignedID of the case with the lawyer's ID
-    $case->update(['AssignedID' => $assignedLawyerId]);
-
-    // Create a record in the AssignedLawyer table
-    AssignedLawyer::create([
-        'assignedID' => $assignedLawyerId,
-        'caseID' => $CaseID,
+        // Create a new record in the AssignedLawyer table
+       $assignedLawyer = AssignedLawyer::create([
+        'id' => $assignedLawyerId,
+        // Add other fields if needed
     ]);
+            $assignedId = $assignedLawyer->AssignedID;
 
-    return redirect()->back()->with('success', 'Case successfully grabbed.');
-}
+        // Update the AssignedID column in the Case table
+    $case->update(['AssignedID' => $assignedId]);
 
+        return redirect()->back()->with('success', 'Case successfully grabbed.');
+    }
 }
