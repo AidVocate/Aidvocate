@@ -21,7 +21,7 @@ class PBOController extends Controller
 
         // Return the view with the cases data
         return inertia('PBO/List', [
-            'cases' => $cases,
+            'cases' => $cases
         ]);
     }
 }

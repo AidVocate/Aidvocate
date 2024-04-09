@@ -74,6 +74,7 @@ Route::middleware(['auth', RoleMiddleware::class . ':Client'])->group(function (
 //Lawyer
 Route::middleware(['auth', RoleMiddleware::class . ':Lawyer'])->group(function () {
     Route::get('/lawyer', [LawyerController::class, 'index']);
+    Route::get('/lawyer/ViewLegalNeedBoard', [LawyerController::class, 'CaseList'])->name('cases.index');
     // Other user routes...
 });
 
