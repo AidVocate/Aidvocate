@@ -1,14 +1,16 @@
 import React from 'react';
 import { Link } from '@inertiajs/inertia-react';
-import { CaseData } from '../../Components/ViewLegalNeedModels/CaseModel';
+import { CaseModel } from '../../Components/ViewLegalNeedModels/CaseModel';
 import { QuestionData } from '../../Components/ViewLegalNeedModels/QuestionModel';
 
 interface Props {
-    caseDetails: CaseData;
+    caseDetails: CaseModel;
     caseQuestions: QuestionData;
 }
 
 const LegalNeed: React.FC<Props> = ({ caseDetails: caseData, caseQuestions: questionData }) => {
+    
+    
     return (
         <div className="container mx-auto mt-8">
             <h2 className="text-2xl font-bold mb-4">Case Details</h2>
@@ -63,7 +65,7 @@ const LegalNeed: React.FC<Props> = ({ caseDetails: caseData, caseQuestions: ques
                     <input
                         type="text"
                         name="Question1"
-                        value={questionData.Question1}
+                        value={questionData?.Question1 ?? 'N/A'}
                         readOnly
                         className="border border-gray-300 rounded px-4 py-2 w-full"
                     />
@@ -73,7 +75,7 @@ const LegalNeed: React.FC<Props> = ({ caseDetails: caseData, caseQuestions: ques
                     <input
                         type="text"
                         name="Question2"
-                        value={questionData.Question2}
+                        value={questionData?.Question2 ?? 'N/A'}
                         readOnly
                         className="border border-gray-300 rounded px-4 py-2 w-full"
                     />
@@ -83,7 +85,7 @@ const LegalNeed: React.FC<Props> = ({ caseDetails: caseData, caseQuestions: ques
                     <input
                         type="text"
                         name="Question3"
-                        value={questionData.Question3}
+                        value={questionData?.Question3 ?? 'N/A'}
                         readOnly
                         className="border border-gray-300 rounded px-4 py-2 w-full"
                     />
@@ -95,7 +97,7 @@ const LegalNeed: React.FC<Props> = ({ caseDetails: caseData, caseQuestions: ques
                     <input
                         type="text"
                         name="ReasonForChange"
-                        value={caseData.ReasonForChange}
+                        // value={caseData.ReasonForChange}
                         readOnly
                         className="border border-gray-300 rounded px-4 py-2 w-full"
                     />
@@ -106,7 +108,7 @@ const LegalNeed: React.FC<Props> = ({ caseDetails: caseData, caseQuestions: ques
                     <input
                         type="text"
                         name="Signature"
-                        value={caseData.Signature}
+                        // value={caseData.Signature}
                         readOnly
                         className="border border-gray-300 rounded px-4 py-2 w-full"
                     />

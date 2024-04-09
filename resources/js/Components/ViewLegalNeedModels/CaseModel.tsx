@@ -1,14 +1,9 @@
-
-export interface CaseData {
+export interface CaseModel {
     CaseID: number;
     DateOfNextAppearance: string;
     NatureOfAppearance: string;
+    CourtDocuments?: string;
     ServicesLanguage?: string;
     AdditionalInformation?: string;
-    ReasonForChange?: string;
-    Signature?: string;
-    // Question1?: string;
-    // Question2?: string;
-    // Question3?: string;
-    // Add more fields if necessary
+    Approved: boolean;
 }
