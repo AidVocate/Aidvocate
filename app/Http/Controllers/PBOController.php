@@ -33,4 +33,15 @@ class PBOController extends Controller
             'caseQuestions' => $caseQuestions,
         ]);
     }
+
+    public function CaseList()
+    {
+        // Retrieve all cases that are not approved
+        $cases = CaseModel::where('Approved', false)->get();
+
+        // Return the view with the cases data
+        return inertia('PBO/List', [
+            'cases' => $cases
+        ]);
+    }
 }

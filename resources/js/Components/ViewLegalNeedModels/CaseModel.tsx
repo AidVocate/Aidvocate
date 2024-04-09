@@ -1,4 +1,3 @@
-// types.d.ts
 
 export interface CaseData {
     CaseID: number;
@@ -12,4 +11,9 @@ export interface CaseData {
     // Question2?: string;
     // Question3?: string;
     // Add more fields if necessary
+}
+    CourtDocuments?: string;
+    ServicesLanguage?: string;
+    AdditionalInformation?: string;
+    Approved: boolean;
 }
