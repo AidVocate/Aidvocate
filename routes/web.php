@@ -75,7 +75,8 @@ Route::middleware(['auth', RoleMiddleware::class . ':Client'])->group(function (
 Route::middleware(['auth', RoleMiddleware::class . ':Lawyer'])->group(function () {
     Route::get('/lawyer', [LawyerController::class, 'index']);
     Route::get('/lawyer/ViewLegalNeedBoard', [LawyerController::class, 'CaseList'])->name('cases.index');
-    // Other user routes...
+    Route::get('/lawyer/SubmitsOffer', [LawyerController::class, 'submitsOffer']);
+    Route::post('/lawyer/SubmitsOffer/{case}', [LawyerController::class, 'grabCase'])->name('cases.grab');
 });
 
 //PBO
