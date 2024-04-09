@@ -11,6 +11,7 @@ class CaseModel extends Model
 
     protected $table = 'Case';
 
+    protected $primaryKey = 'CaseID';
 
     protected $fillable = [
         'id',
