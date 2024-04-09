@@ -7,8 +7,6 @@ use App\Models\CaseModel;
 use Illuminate\Http\Request;
 use App\Models\AssignedLawyer;
 use App\Http\Controllers\Controller;
-use App\Models\CaseModel;
-
 
 class LawyerController extends Controller
 {
