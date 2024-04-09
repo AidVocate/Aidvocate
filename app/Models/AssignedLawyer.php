@@ -9,6 +9,7 @@ class AssignedLawyer extends Model
 {
     use HasFactory;
 
+
     protected $table = 'AssignedLawyer';
 
     protected $fillable = [

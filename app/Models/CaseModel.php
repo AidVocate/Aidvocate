@@ -21,7 +21,7 @@ class CaseModel extends Model
         'ServicesLanguage',
         'AdditionalInformation',
         'Approved',
-        'AssignedID',
+        'AssignedID'
     ];
 
     // Define the relationship with CaseQuestions
