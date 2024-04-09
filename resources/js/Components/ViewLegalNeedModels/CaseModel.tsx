@@ -12,8 +12,3 @@ export interface CaseData {
     // Question3?: string;
     // Add more fields if necessary
 }
-    CourtDocuments?: string;
-    ServicesLanguage?: string;
-    AdditionalInformation?: string;
-    Approved: boolean;
-}
