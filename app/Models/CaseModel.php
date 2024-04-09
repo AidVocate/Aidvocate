@@ -45,4 +45,8 @@ class CaseModel extends Model
         return $this->belongsTo(CaseModel::class, 'id');
     }
 
+    public function AssignedLawyer()
+    {
+        return $this->belongsTo(AssignedLawyer::class, 'AssignedID');
+    }
 }
