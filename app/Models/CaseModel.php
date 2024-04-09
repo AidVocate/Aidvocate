@@ -11,6 +11,7 @@ class CaseModel extends Model
 
     protected $table = 'Case';
 
+    protected $primaryKey = 'CaseID';
 
     protected $fillable = [
         'id',
@@ -44,4 +45,8 @@ class CaseModel extends Model
         return $this->belongsTo(CaseModel::class, 'id');
     }
 
+    public function AssignedLawyer()
+    {
+        return $this->belongsTo(AssignedLawyer::class, 'AssignedID');
+    }
 }

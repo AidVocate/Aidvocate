@@ -74,13 +74,19 @@ Route::middleware(['auth', RoleMiddleware::class . ':Client'])->group(function (
 //Lawyer
 Route::middleware(['auth', RoleMiddleware::class . ':Lawyer'])->group(function () {
     Route::get('/lawyer', [LawyerController::class, 'index']);
-    // Other user routes...
+    Route::get('/lawyer/ViewLegalNeedBoard', [LawyerController::class, 'CaseList'])->name('cases.index');
+    Route::get('/lawyer/SubmitsOffer', [LawyerController::class, 'submitsOffer']);
+    Route::post('/lawyer/SubmitsOffer/{case}', [LawyerController::class, 'grabCase'])->name('cases.grab');
 });
 
 //PBO
 
 Route::middleware(['auth', RoleMiddleware::class . ':PBO'])->group(function () {
     Route::get('/pbo', [PBOController::class, 'index']);
+    Route::get('/pbo/ViewLegalNeed/{CaseID}', [PBOController::class, 'ViewLegalNeed']);
+
+    // Post for update/public legal need?
+    Route::get('/pbo/ViewLegalNeedBoard', [PBOController::class, 'CaseList'])->name('cases.index');
     // Other user routes...
 });
 
