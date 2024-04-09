@@ -21,7 +21,7 @@ class LawyerController extends Controller
         $cases = CaseModel::where('Approved', true)->get();
 
         // Return the view with the cases data
-        return inertia('Lawyer/List', [
+        return inertia('Lawyer/LawyerLegalNeedBoard', [
             'cases' => $cases
         ]);
     }

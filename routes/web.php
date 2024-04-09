@@ -84,7 +84,6 @@ Route::middleware(['auth', RoleMiddleware::class . ':Lawyer'])->group(function (
 Route::middleware(['auth', RoleMiddleware::class . ':PBO'])->group(function () {
     Route::get('/pbo', [PBOController::class, 'index']);
     Route::get('/pbo/ViewLegalNeedBoard', [PBOController::class, 'CaseList'])->name('cases.index');
-
     // Other user routes...
 });
 

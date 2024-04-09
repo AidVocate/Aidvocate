@@ -20,7 +20,7 @@ class PBOController extends Controller
         $cases = CaseModel::where('Approved', false)->get();
 
         // Return the view with the cases data
-        return inertia('PBO/List', [
+        return inertia('PBO/PBOLegalNeedBoard', [
             'cases' => $cases
         ]);
     }
