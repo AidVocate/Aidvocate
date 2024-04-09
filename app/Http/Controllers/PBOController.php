@@ -20,20 +20,17 @@ class PBOController extends Controller
         return Inertia::render('PBO/Index');
     }
 
-    public function ViewLegalNeedForm()
-    {
-
-        return Inertia::render('PBO/ViewLegalNeed');
-    }
-
-    public function show($CaseID)
+    public function ViewLegalNeed($CaseID)
     {
         // Retrieve the case by its ID
-        $case = CaseModel::findOrFail($CaseID);
+        $caseDetails = CaseModel::findOrFail($CaseID);
+        // $question = CaseQuestions::where('CaseID', '=', $CaseID);
+        $caseQuestions = CaseQuestions::where('CaseID', $CaseID)->first();
 
         // Return the view with the case data
-        return inertia('PBO/TestLegalNeed', [
-            'case' => $case,
+        return inertia('PBO/ViewLegalNeed', [
+            'caseDetails' => $caseDetails,
+            'caseQuestions' => $caseQuestions,
         ]);
     }
 }

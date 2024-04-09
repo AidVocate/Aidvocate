@@ -1,57 +1,40 @@
-import React, { FormEvent, useState } from 'react';
-import { useForm } from '@inertiajs/inertia-react';
-import InputError from '@/Components/InputError';
+import React from 'react';
+import { Link } from '@inertiajs/inertia-react';
+import { CaseData } from '../../Components/ViewLegalNeedModels/CaseModel';
+import { QuestionData } from '../../Components/ViewLegalNeedModels/QuestionModel';
 
+interface Props {
+    caseDetails: CaseData;
+    caseQuestions: QuestionData;
+}
 
-const ViewLegalNeed = () => {
-    const { data, setData, post, errors } = useForm({
-        DateOfNextAppearance: '',
-        NatureOfAppearance: '',
-        ServicesLanguage: '',
-        AdditionalInformation: '',
-        Question1: '',
-        Question2: '',
-        Question3: '',
-        ReasonForChange: '',
-        Signature: '',
-        PrintName: '',
-        SignDate: ''
-
-    });
-
-    const handleSubmit = (e: FormEvent) => {
-        e.preventDefault();
-        post(route('createLegalNeed'));
-    };
-
+const LegalNeed: React.FC<Props> = ({ caseDetails: caseData, caseQuestions: questionData }) => {
     return (
         <div className="container mx-auto mt-8">
-            <h2 className="text-2xl font-bold mb-4">Legal Need Form</h2>
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <h2 className="text-2xl font-bold mb-4">Case Details</h2>
+            <form className="space-y-4">
                 {/* Case Information */}
                 <div>
                     <label className="block mb-1">Date of Next Appearance *</label>
                     <input
                         type="date"
                         name="DateOfNextAppearance"
-                        value={data.DateOfNextAppearance}
-                        onChange={(e: ChangeEvent) => setData('DateOfNextAppearance', e.target.value)}
-                        
+                        value={caseData.DateOfNextAppearance}
+                        readOnly
                         className="border border-gray-300 rounded px-4 py-2 w-full"
                     />
-                    <InputError message={errors.DateOfNextAppearance} className="mt-2" />
+                    {/* <InputError message={errors.DateOfNextAppearance} className="mt-2" /> */}
                 </div>
                 <div>
                     <label className="block mb-1">Nature of Appearance *</label>
                     <input
                         type="text"
                         name="NatureOfAppearance"
-                        value={data.NatureOfAppearance}
-                        onChange={(e) => setData('NatureOfAppearance', e.target.value)}
-                        
+                        value={caseData.NatureOfAppearance}
+                        readOnly
                         className="border border-gray-300 rounded px-4 py-2 w-full"
                     />
-                    <InputError message={errors.NatureOfAppearance} className="mt-2" />
+                    {/* <InputError message={errors.NatureOfAppearance} className="mt-2" /> */}
 
                 </div>
                 <div>
@@ -59,8 +42,8 @@ const ViewLegalNeed = () => {
                     <input
                         type="text"
                         name="ServicesLanguage"
-                        value={data.ServicesLanguage}
-                        onChange={(e) => setData('ServicesLanguage', e.target.value)}
+                        value={caseData.ServicesLanguage}
+                        readOnly
                         className="border border-gray-300 rounded px-4 py-2 w-full"
                     />
                 </div>
@@ -68,20 +51,20 @@ const ViewLegalNeed = () => {
                     <label className="block mb-1">Additional Information</label>
                     <textarea
                         name="AdditionalInformation"
-                        value={data.AdditionalInformation}
-                        onChange={(e) => setData('AdditionalInformation', e.target.value)}
+                        value={caseData.AdditionalInformation}
+                        readOnly
                         className="border border-gray-300 rounded px-4 py-2 w-full"
                     />
                 </div>
 
-                {/* Case Questions */}
+                <h3 className="font-bold mb-4">Case Questions</h3>
                 <div>
                     <label className="block mb-1">Question 1</label>
                     <input
                         type="text"
                         name="Question1"
-                        value={data.Question1}
-                        onChange={(e) => setData('Question1', e.target.value)}
+                        value={questionData.Question1}
+                        readOnly
                         className="border border-gray-300 rounded px-4 py-2 w-full"
                     />
                 </div>
@@ -90,8 +73,8 @@ const ViewLegalNeed = () => {
                     <input
                         type="text"
                         name="Question2"
-                        value={data.Question2}
-                        onChange={(e) => setData('Question2', e.target.value)}
+                        value={questionData.Question2}
+                        readOnly
                         className="border border-gray-300 rounded px-4 py-2 w-full"
                     />
                 </div>
@@ -100,8 +83,8 @@ const ViewLegalNeed = () => {
                     <input
                         type="text"
                         name="Question3"
-                        value={data.Question3}
-                        onChange={(e) => setData('Question3', e.target.value)}
+                        value={questionData.Question3}
+                        readOnly
                         className="border border-gray-300 rounded px-4 py-2 w-full"
                     />
                 </div>
@@ -112,8 +95,8 @@ const ViewLegalNeed = () => {
                     <input
                         type="text"
                         name="ReasonForChange"
-                        value={data.ReasonForChange}
-                        onChange={(e) => setData('ReasonForChange', e.target.value)}
+                        value={caseData.ReasonForChange}
+                        readOnly
                         className="border border-gray-300 rounded px-4 py-2 w-full"
                     />
                 </div>
@@ -123,28 +106,8 @@ const ViewLegalNeed = () => {
                     <input
                         type="text"
                         name="Signature"
-                        value={data.Signature}
-                        onChange={(e) => setData('Signature', e.target.value)}
-                        className="border border-gray-300 rounded px-4 py-2 w-full"
-                    />
-                </div>
-                <div>
-                    <label className="block mb-1">Print Name</label>
-                    <input
-                        type="text"
-                        name="PrintName"
-                        value={data.PrintName}
-                        onChange={(e) => setData('PrintName', e.target.value)}
-                        className="border border-gray-300 rounded px-4 py-2 w-full"
-                    />
-                </div>
-                <div>
-                    <label className="block mb-1">Sign Date</label>
-                    <input
-                        type="date"
-                        name="SignDate"
-                        value={data.SignDate}
-                        onChange={(e) => setData('SignDate', e.target.value)}
+                        value={caseData.Signature}
+                        readOnly
                         className="border border-gray-300 rounded px-4 py-2 w-full"
                     />
                 </div>
@@ -156,4 +119,4 @@ const ViewLegalNeed = () => {
     );
 };
 
-export default ViewLegalNeed;
+export default LegalNeed;
