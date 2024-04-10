@@ -15,11 +15,14 @@ interface Props {
 const LegalNeed: React.FC<Props> = ({ caseDetails: caseData, caseQuestions: questionData, 
     caseRepresentation: repData, caseSignature: signData }) => {
     
-    
+    const approveLegalNeed = (e: FormEvent) => {
+        e.preventDefault();
+    };
+
     return (
         <div className="container mx-auto mt-8">
             <h2 className="text-2xl font-bold mb-4">Case Details</h2>
-            <form className="space-y-4">
+            <form onSubmit={approveLegalNeed} className="space-y-4">
                 {/* Case Information */}
                 <div>
                     <label className="block mb-1">Date of Next Appearance *</label>
@@ -126,6 +129,7 @@ const LegalNeed: React.FC<Props> = ({ caseDetails: caseData, caseQuestions: ques
                         type="text"
                         name="PrintName"
                         value={signData?.PrintName ?? 'N/A'}
+                        readOnly
                         className="border border-gray-300 rounded px-4 py-2 w-full"
                     />
                 </div>
@@ -136,12 +140,13 @@ const LegalNeed: React.FC<Props> = ({ caseDetails: caseData, caseQuestions: ques
                         type="text"
                         name="SignDate"
                         value={signData.SignDate}
+                        readOnly
                         className="border border-gray-300 rounded px-4 py-2 w-full"
                     />
                 </div>
 
                 {/* Submit button */}
-                <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-colors">Publish</button>
+                <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-colors">Approve</button>
             </form>
         </div>
     );
