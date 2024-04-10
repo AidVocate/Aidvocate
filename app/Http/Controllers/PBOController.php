@@ -24,13 +24,16 @@ class PBOController extends Controller
     {
         // Retrieve the case by its ID
         $caseDetails = CaseModel::findOrFail($CaseID);
-        // $question = CaseQuestions::where('CaseID', '=', $CaseID);
         $caseQuestions = CaseQuestions::where('CaseID', $CaseID)->first();
+        $caseRepresentation = LegalRepresentation::where('CaseID', $CaseID)->first();
+        $caseSignature = Signature::where('CaseID', $CaseID)->first();
 
         // Return the view with the case data
         return inertia('PBO/ViewLegalNeed', [
             'caseDetails' => $caseDetails,
             'caseQuestions' => $caseQuestions,
+            'caseRepresentation' => $caseRepresentation,
+            'caseSignature' => $caseSignature,
         ]);
     }
 

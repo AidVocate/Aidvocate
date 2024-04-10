@@ -2,13 +2,18 @@ import React from 'react';
 import { Link } from '@inertiajs/inertia-react';
 import { CaseModel } from '../../Components/ViewLegalNeedModels/CaseModel';
 import { QuestionData } from '../../Components/ViewLegalNeedModels/QuestionModel';
+import { RepresentationData } from '@/Components/ViewLegalNeedModels/RepresentationModel';
+import { SignatureData } from '@/Components/ViewLegalNeedModels/SignatureModel';
 
 interface Props {
     caseDetails: CaseModel;
     caseQuestions: QuestionData;
+    caseRepresentation: RepresentationData;
+    caseSignature: SignatureData;
 }
 
-const LegalNeed: React.FC<Props> = ({ caseDetails: caseData, caseQuestions: questionData }) => {
+const LegalNeed: React.FC<Props> = ({ caseDetails: caseData, caseQuestions: questionData, 
+    caseRepresentation: repData, caseSignature: signData }) => {
     
     
     return (
@@ -91,25 +96,46 @@ const LegalNeed: React.FC<Props> = ({ caseDetails: caseData, caseQuestions: ques
                     />
                 </div>
 
-                {/* Legal Representation */}
+                <h3 className="font-bold mb-4">Case Representation</h3>
                 <div>
                     <label className="block mb-1">Reason for Change</label>
                     <input
                         type="text"
                         name="ReasonForChange"
-                        // value={caseData.ReasonForChange}
+                        value={repData?.ReasonForChange ?? 'N/A'}
+                        readOnly
+                        className="border border-gray-300 rounded px-4 py-2 w-full"
+                    />
+                </div>
+
+                <h3 className="font-bold mb-4">Case Signature</h3>
+                <div>
+                    <label className="block mb-1">Signature</label>
+                    <input
+                        type="text"
+                        name="Signature"
+                        value={signData?.Signature ?? 'N/A'}
                         readOnly
                         className="border border-gray-300 rounded px-4 py-2 w-full"
                     />
                 </div>
 
                 <div>
-                    <label className="block mb-1">Signature</label>
+                    <label className="block mb-1">Print Name</label>
                     <input
                         type="text"
-                        name="Signature"
-                        // value={caseData.Signature}
-                        readOnly
+                        name="PrintName"
+                        value={signData?.PrintName ?? 'N/A'}
+                        className="border border-gray-300 rounded px-4 py-2 w-full"
+                    />
+                </div>
+
+                <div>
+                    <label className="block mb-1">Sign Date</label>
+                    <input
+                        type="text"
+                        name="SignDate"
+                        value={signData.SignDate}
                         className="border border-gray-300 rounded px-4 py-2 w-full"
                     />
                 </div>
