@@ -6,15 +6,18 @@ import Container from '@mui/material/Container';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import Avatar from '@mui/material/Avatar';
+import MenuSharpIcon from '@mui/icons-material/MenuSharp';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import Divider from '@mui/material/Divider';
-import PersonAdd from '@mui/icons-material/PersonAdd';
+import AccountBoxSharpIcon from '@mui/icons-material/AccountBoxSharp';
 import Settings from '@mui/icons-material/Settings';
-import Logout from '@mui/icons-material/Logout';
+import DashboardSharpIcon from '@mui/icons-material/DashboardSharp';
+import LoginSharpIcon from '@mui/icons-material/LoginSharp';
+import LogoutSharpIcon from '@mui/icons-material/LogoutSharp';
+import PersonAddSharpIcon from '@mui/icons-material/PersonAddSharp';
 import { Link } from '@inertiajs/react';
+import { OverridableComponent } from '@mui/material/OverridableComponent';
+import { SvgIconTypeMap } from '@mui/material/SvgIcon';
 
 interface RouteInfo {
   name: string,
@@ -25,6 +28,26 @@ interface RouteInfo {
 interface Props {
   routes?: RouteInfo[]
 }
+
+interface IconMap {
+  [key: string]: OverridableComponent<SvgIconTypeMap<{}, "svg">> & {
+    muiName: string;
+  }
+}
+
+const RouteIcons: IconMap = {
+  Default: Settings,
+  Register: PersonAddSharpIcon,
+  Login: LoginSharpIcon,
+  Logout: LogoutSharpIcon,
+  Dashboard: DashboardSharpIcon,
+  Profile: AccountBoxSharpIcon
+}
+
+const LinkIcon = ({ name }: {name: string}) => {
+  const Icon = RouteIcons[name] || RouteIcons.Default;
+  return <Icon />;
+};
 
 export default function NavBar({ routes }: Props) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -58,6 +81,7 @@ export default function NavBar({ routes }: Props) {
             ))}
           </nav>
           <IconButton
+            className="ml-auto sm:hidden"
             onClick={handleClick}
             size="small"
             sx={{ ml: 2 }}
@@ -65,7 +89,7 @@ export default function NavBar({ routes }: Props) {
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
           >
-            <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+            <MenuSharpIcon className='text-white w-12 h-12'/>
           </IconButton>
         </Container>
       </Toolbar>
@@ -88,23 +112,18 @@ export default function NavBar({ routes }: Props) {
       open={open}
       onClose={handleClose}
     >
-      <MenuItem onClick={handleClose} disableRipple>
-        <ListItemIcon />
-        Edit
-      </MenuItem>
-      <MenuItem onClick={handleClose} disableRipple>
-        <Logout />
-        Duplicate
-      </MenuItem>
-      <Divider sx={{ my: 0.5 }} />
-      <MenuItem onClick={handleClose} disableRipple>
-        <Settings />
-        Archive
-      </MenuItem>
-      <MenuItem onClick={handleClose} disableRipple>
-        <PersonAdd />
-        More
-      </MenuItem>
+       {routes && routes.map((routeInfo) => (
+        <MenuItem disableRipple>
+          <LinkIcon name={routeInfo.name}/>
+          <Link
+              href={route(routeInfo.route)}
+              {...(routeInfo.post && { method: "post" })}
+              className="ml-6 no-underline text-black hover:text-blue-900 hover:underline"
+          >
+            {routeInfo.name}
+          </Link>
+        </MenuItem>
+      ))}
     </Menu>
     <div className='mb-20'/>
   </>);
