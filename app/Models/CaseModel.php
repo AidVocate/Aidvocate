@@ -11,6 +11,7 @@ class CaseModel extends Model
 
     protected $table = 'Case';
 
+    protected $primaryKey = 'CaseID';
 
     protected $fillable = [
         'id',
@@ -19,6 +20,7 @@ class CaseModel extends Model
         'CourtDocuments',
         'ServicesLanguage',
         'AdditionalInformation',
+        'Approved',
     ];
 
     // Define the relationship with CaseQuestions
@@ -41,5 +43,11 @@ class CaseModel extends Model
     {
         return $this->belongsTo(CaseModel::class, 'id');
     }
+
+    public function AssignedLawyer()
+    {
+        return $this->hasOne(AssignedLawyer::class, 'CaseID');
+    }
+    
 
 }
