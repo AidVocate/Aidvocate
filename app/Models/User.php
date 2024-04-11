@@ -62,6 +62,10 @@ class User extends Authenticatable implements MustVerifyEmail
     }
     
     
-
+    // Define the relationship with LegalRepresentation
+    public function CaseModel()
+    {
+        return $this->hasOne(CaseModel::class, 'id');
+    }
 
 }

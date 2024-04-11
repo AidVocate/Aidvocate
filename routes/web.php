@@ -13,6 +13,8 @@ use Tests\Feature\Auth\EmailVerificationTest;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Middleware\RoleMiddleware;
 
+require __DIR__.'/auth.php';
+
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -64,21 +66,35 @@ Route::middleware(['auth', RoleMiddleware::class . ':Admin'])->group(function ()
 
 Route::middleware(['auth', RoleMiddleware::class . ':Client'])->group(function () {
     Route::get('/client', [ClientController::class, 'index']);
+    Route::get('/client/CreateLegalNeed', [ClientController::class, 'ViewLegalNeedForm']);
+    Route::post('/client/CreateLegalNeed', [ClientController::class, 'AddLegalNeed'])->name('createLegalNeed');
     // Other user routes...
 });
 
 //Lawyer
 Route::middleware(['auth', RoleMiddleware::class . ':Lawyer'])->group(function () {
     Route::get('/lawyer', [LawyerController::class, 'index']);
-    // Other user routes...
+    Route::get('/lawyer/ViewLegalNeedBoard', [LawyerController::class, 'CaseList'])->name('cases.index');
+    Route::get('/lawyer/SubmitsOffer', [LawyerController::class, 'submitsOffer']);
+    Route::post('/lawyer/SubmitsOffer/{CaseID}', [LawyerController::class, 'grabCase'])->name('cases.grab');
+    Route::get('/lawyer/SubmitsOffer/{CaseID}', [LawyerController::class, 'ViewLegalNeed']);
+
 });
 
 //PBO
 
 Route::middleware(['auth', RoleMiddleware::class . ':PBO'])->group(function () {
     Route::get('/pbo', [PBOController::class, 'index']);
+    Route::get('/pbo/ViewLegalNeed/{CaseID}', [PBOController::class, 'ViewLegalNeed']);
+    Route::post('/pbo/ViewLegalNeed/{CaseID}', [PBOController::class, 'ApproveLegalNeed']);
+    // Post for update/public legal need?
+    Route::get('/pbo/ViewLegalNeedBoard', [PBOController::class, 'CaseList'])->name('cases.index');
     // Other user routes...
 });
 
 
-require __DIR__.'/auth.php';
+//404
+Route::get('/{any}', function () {
+    abort(404);
+})->where('any', '.*');
+

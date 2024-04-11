@@ -1,7 +1,5 @@
 // resources/js/Pages/Client/Index.jsx
 
-import React from 'react';
-
 const Index = () => {
     return (
         <div>

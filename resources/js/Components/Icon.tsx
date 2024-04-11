@@ -1,0 +1,9 @@
+interface Props {
+  size: number
+}
+
+export default function Icon({size}: Props) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 600 600" version="1.1"><path d="" stroke="none" fill="#30acd4" fillRule="evenodd"/><path d="M 8 299.753 L 8 592 74 592 L 140 592 140 365.747 L 140 139.494 74 73.500 L 8 7.506 8 299.753 M 206 398.753 L 206 592 399.247 592 L 592.494 592 531.500 531 L 470.506 470 404.253 470 L 338 470 338 403.747 L 338 337.494 272 271.500 L 206 205.506 206 398.753" stroke="none" fill="#2cacd4" fillRule="evenodd"/></svg>
+  )
+}
