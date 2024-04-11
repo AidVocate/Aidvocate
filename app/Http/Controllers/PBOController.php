@@ -47,4 +47,22 @@ class PBOController extends Controller
             'cases' => $cases
         ]);
     }
+
+    public function ViewLegalNeed($CaseID)
+    {
+        // Retrieve the case by its ID
+        $caseDetails = CaseModel::findOrFail($CaseID);
+        $caseQuestions = CaseQuestions::where('CaseID', $CaseID)->first();
+        $caseRepresentation = LegalRepresentation::where('CaseID', $CaseID)->first();
+        $caseSignature = Signature::where('CaseID', $CaseID)->first();
+        
+
+        // Return the view with the case data
+        return inertia('PBO/ViewLegalNeed', [
+            'caseDetails' => $caseDetails,
+            'caseQuestions' => $caseQuestions,
+            'caseRepresentation' => $caseRepresentation,
+            'caseSignature' => $caseSignature,
+        ]);
+    }
 }
