@@ -15,17 +15,17 @@ interface Props {
 const LegalNeed: React.FC<Props> = ({ caseDetails: caseData, caseQuestions: questionData, 
     caseRepresentation: repData, caseSignature: signData }) => {
     
-    const approveLegalNeed = (e: FormEvent) => {
-        e.preventDefault();
+    // const approveLegalNeed = (e: FormEvent) => {
+    //     e.preventDefault();
         
-        const post = Link
-        post(route('approveLegalNeed'));
-    };
+    //     const post = Link
+    //     post(route('approveLegalNeed'));
+    // };
 
     return (
         <div className="container mx-auto mt-8">
             <h2 className="text-2xl font-bold mb-4">Case Details</h2>
-            <form onSubmit={approveLegalNeed} className="space-y-4">
+            <form className="space-y-4">
                 {/* Case Information */}
                 <div>
                     <label className="block mb-1">Date of Next Appearance *</label>
@@ -150,6 +150,9 @@ const LegalNeed: React.FC<Props> = ({ caseDetails: caseData, caseQuestions: ques
 
                 {/* Submit button */}
                 <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-colors">Approve</button>
+                <Link href={route('cases.grab', { CaseID: caseData.CaseID })} method="post" as="button" className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-colors">
+                    Approve
+                </Link>
             </form>
         </div>
     );
