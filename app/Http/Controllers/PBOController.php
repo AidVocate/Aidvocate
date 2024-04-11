@@ -10,6 +10,7 @@ use App\Models\CaseQuestions;
 use Illuminate\Support\Facades\DB;
 use App\Models\LegalRepresentation;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -56,13 +57,34 @@ class PBOController extends Controller
         $caseRepresentation = LegalRepresentation::where('CaseID', $CaseID)->first();
         $caseSignature = Signature::where('CaseID', $CaseID)->first();
         
-
-        // Return the view with the case data
+        // Retrieve user information associated with the case
+        $user = User::findOrFail($caseDetails->id);
+    
+        // Return the view with the case data along with user information
         return inertia('PBO/ViewLegalNeed', [
             'caseDetails' => $caseDetails,
             'caseQuestions' => $caseQuestions,
             'caseRepresentation' => $caseRepresentation,
             'caseSignature' => $caseSignature,
+            'CasePerson' => $user,
         ]);
     }
+
+    // public function ViewLegalNeed($CaseID)
+    // {
+    //     // Retrieve the case by its ID along with additional data from related tables
+    //     $caseDetails = CaseModel::with([
+    //         'caseQuestions',
+    //         'legalRepresentation',
+    //         'signature',
+    //         'users', // Include the User relationship
+    //     ])->findOrFail($CaseID);
+        
+    //     // Return the view with the case data
+    //     return inertia('PBO/ViewLegalNeed', [
+    //         'caseDetails' => $caseDetails,
+    //     ]);
+    // }
+    
+    
 }

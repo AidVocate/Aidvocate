@@ -44,9 +44,10 @@ class CaseModel extends Model
         return $this->belongsTo(CaseModel::class, 'id');
     }
 
-    public function AssinedLawyer()
+    public function AssignedLawyer()
     {
         return $this->hasOne(AssignedLawyer::class, 'CaseID');
     }
+    
 
 }

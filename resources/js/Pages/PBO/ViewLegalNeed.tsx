@@ -15,12 +15,12 @@ interface Props extends inertia.Auth {
     caseRepresentation: RepresentationData;
     caseSignature: SignatureData;
     mustVerifyEmail: boolean;
-    CasePersonInformation:PersonInfo;
+    CasePerson: PersonInfo;
     status?: 'verification-link-sent';
 }
 
 const LegalNeed: React.FC<Props> = ({ caseDetails: caseData, caseQuestions: questionData,
-    caseRepresentation: repData, caseSignature: signData, CasePersonInformation: CasePerson, auth }: Props) => {
+    caseRepresentation: repData, caseSignature: signData, CasePerson: CasePerson, auth }: Props) => {
 
     return (
         <AuthenticatedLayout
@@ -30,8 +30,33 @@ const LegalNeed: React.FC<Props> = ({ caseDetails: caseData, caseQuestions: ques
 
             <Head title="Legal Need Board" />
 
+
             <div className="container mx-auto mt-8 p-8 bg-white rounded-lg shadow-lg border border-gray-200">
                 <h2 className="text-2xl font-bold mb-6 border-b pb-2">Case Details</h2>
+
+                <div className="p-4 bg-gray-50 rounded">
+                    <h3 className="font-bold mb-2 text-gray-800">Personal Information</h3>
+                    <div className="space-y-2">
+                        <div>
+                            <label className="block mb-1 font-medium text-gray-600">Name</label>
+                            <div className="p-2 bg-white border rounded">{CasePerson.FirstName} {CasePerson.LastName}</div>
+                        </div>
+                        <div>
+                            <label className="block mb-1 font-medium text-gray-600">Email</label>
+                            <div className="p-2 bg-white border rounded">{CasePerson.email}</div>
+                        </div>
+                        <div>
+                            <label className="block mb-1 font-medium text-gray-600">Phone Number</label>
+                            <div className="p-2 bg-white border rounded">{CasePerson.Phone}</div>
+                        </div>
+                        <div>
+                            <label className="block mb-1 font-medium text-gray-600">Are they able to leave them a voice mail</label>
+                            <div className="p-2 bg-white border rounded">{CasePerson.VoiceMail ? 'Yes' : 'No'}</div>
+                        </div>
+                    </div>
+                </div>
+
+
                 <div className="space-y-4">
                     {/* Case Information Section */}
                     <div className="p-4 bg-gray-50 rounded">

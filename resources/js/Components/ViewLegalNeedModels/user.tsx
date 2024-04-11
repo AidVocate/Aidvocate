@@ -2,7 +2,7 @@ export interface PersonInfo {
     id: number;
     FirstName?: string;
     LastName?: string;
-    Email?: string;
+    email?: string;
     Phone?: string;
     VoiceMail?: boolean;
 
