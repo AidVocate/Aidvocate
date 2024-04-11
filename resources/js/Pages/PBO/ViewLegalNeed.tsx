@@ -19,7 +19,6 @@ const LegalNeed: React.FC<Props> = ({ caseDetails: caseData, caseQuestions: ques
         e.preventDefault();
         
         const post = Link
-        
         post(route('approveLegalNeed'));
     };
 
