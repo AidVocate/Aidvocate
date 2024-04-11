@@ -38,7 +38,7 @@ const ApprovedList = ({ auth, cases }: Props) => {
   };
 
   const navigateToDifferentPage = (caseID: number) => {
-    window.location.href = `/lawyer/SubmitsOffer/${caseID}`;
+    window.location.href = `/lawyer/ViewLegalNeed/${caseID}`;
   };
 
   return (

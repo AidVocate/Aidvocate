@@ -69,22 +69,6 @@ class PBOController extends Controller
             'CasePerson' => $user,
         ]);
     }
-
-    // public function ViewLegalNeed($CaseID)
-    // {
-    //     // Retrieve the case by its ID along with additional data from related tables
-    //     $caseDetails = CaseModel::with([
-    //         'caseQuestions',
-    //         'legalRepresentation',
-    //         'signature',
-    //         'users', // Include the User relationship
-    //     ])->findOrFail($CaseID);
-        
-    //     // Return the view with the case data
-    //     return inertia('PBO/ViewLegalNeed', [
-    //         'caseDetails' => $caseDetails,
-    //     ]);
-    // }
     
     
 }
