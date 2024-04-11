@@ -36,7 +36,7 @@ const LegalNeed: React.FC<Props> = ({ caseDetails: caseData, caseQuestions: ques
             <div className="container mx-auto mt-8 p-8 bg-white rounded-lg shadow-lg border border-gray-200">
                 <h2 className="text-2xl font-bold mb-6 border-b pb-2">Case Details</h2>
 
-                {/* <div className="p-4 bg-gray-50 rounded">
+                <div className="p-4 bg-gray-50 rounded">
                     <h3 className="font-bold mb-2 text-gray-800">Personal Information</h3>
                     <div className="space-y-2">
                         <div>
@@ -56,7 +56,7 @@ const LegalNeed: React.FC<Props> = ({ caseDetails: caseData, caseQuestions: ques
                             <div className="p-2 bg-white border rounded">{CasePerson.VoiceMail ? 'Yes' : 'No'}</div>
                         </div>
                     </div>
-                </div> */}
+                </div>
 
 
                 <div className="space-y-4">
@@ -129,10 +129,6 @@ const LegalNeed: React.FC<Props> = ({ caseDetails: caseData, caseQuestions: ques
                             </div>
                         </div>
                     </div>
-
-                    <InertiaLink href={route('cases.grab', { CaseID: caseData.CaseID })} method="post" as="button" className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-colors">
-                Grab Case
-            </InertiaLink>
                 </div>
             </div>
 

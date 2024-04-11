@@ -15,6 +15,7 @@ class AssignedLawyer extends Model
         'id',
         'CaseID',
         'Approved',
+        'Case_Close',
     ];
 
     public function user()

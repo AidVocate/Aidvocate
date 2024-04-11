@@ -37,17 +37,6 @@ class LawyerController extends Controller
         ]);
     }
 
-    // public function ViewLegalNeed($CaseID)
-    // {
-    //     // Retrieve the case by its ID
-    //     $case = CaseModel::findOrFail($CaseID);
-
-    //     // Return the view with the case data
-    //     return Inertia::render('Lawyer/SubmitsOffer', [
-    //         'case' => $case,
-    //     ]);
-    // }
-
     public function ViewLegalNeed($CaseID)
     {
         // Check if the CaseID exists in the AssignedLawyer table
@@ -114,4 +103,46 @@ class LawyerController extends Controller
             'message' => 'Case successfully grabbed.'
         ]);
     }
+
+    public function LawyerCaseList()
+    {
+        // Get the ID of the currently logged-in lawyer
+        $lawyerId = auth()->id();
+    
+        // Retrieve cases assigned to the current lawyer along with Approved and Case_Close statuses
+        $cases = CaseModel::select('Case.*', 'AssignedLawyer.Approved', 'AssignedLawyer.Case_Close')
+            ->leftJoin('AssignedLawyer', 'Case.CaseID', '=', 'AssignedLawyer.CaseID')
+            ->where('AssignedLawyer.id', $lawyerId)
+            ->paginate(10);
+    
+        // Return the view with the cases data
+        return inertia('Lawyer/LawyerCases', [
+            'cases' => $cases
+        ]);
+    }
+
+    public function LawyerCase($CaseID)
+    {
+    
+        // Retrieve the case by its ID
+        $caseDetails = CaseModel::findOrFail($CaseID);
+        $caseQuestions = CaseQuestions::where('CaseID', $CaseID)->first();
+        $caseRepresentation = LegalRepresentation::where('CaseID', $CaseID)->first();
+        $caseSignature = Signature::where('CaseID', $CaseID)->first();
+        
+        // Retrieve user information associated with the case
+        $user = User::findOrFail($caseDetails->id);
+    
+        // Return the view with the case data along with user information
+        return inertia('Lawyer/LawyerCase', [
+            'caseDetails' => $caseDetails,
+            'caseQuestions' => $caseQuestions,
+            'caseRepresentation' => $caseRepresentation,
+            'caseSignature' => $caseSignature,
+            'CasePerson' => $user,
+        ]);
+    }
+    
+    
+    
 }
