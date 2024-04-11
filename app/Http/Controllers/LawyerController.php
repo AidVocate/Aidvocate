@@ -20,10 +20,10 @@ class LawyerController extends Controller
     public function CaseList()
     {
         // Retrieve all cases that are not approved
-        $cases = CaseModel::where('Approved', true)->get();
+        $cases = CaseModel::where('Approved', true)->paginate(10);;
 
         // Return the view with the cases data
-        return inertia('Lawyer/List', [
+        return inertia('Lawyer/ViewLegalNeedBoard', [
             'cases' => $cases
         ]);
     }

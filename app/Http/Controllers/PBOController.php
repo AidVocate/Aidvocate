@@ -40,10 +40,10 @@ class PBOController extends Controller
     public function CaseList()
     {
         // Retrieve all cases that are not approved
-        $cases = CaseModel::where('Approved', false)->get();
+        $cases = CaseModel::where('Approved', false)->paginate(10);
 
         // Return the view with the cases data
-        return inertia('PBO/List', [
+        return inertia('PBO/ViewLegalNeedBoard', [
             'cases' => $cases
         ]);
     }
