@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from '@inertiajs/inertia-react';
+import { Link, usePage } from '@inertiajs/inertia-react';
 import { CaseModel } from '../../Components/ViewLegalNeedModels/CaseModel';
 import { QuestionData } from '../../Components/ViewLegalNeedModels/QuestionModel';
 import { RepresentationData } from '@/Components/ViewLegalNeedModels/RepresentationModel';
@@ -15,6 +15,7 @@ interface Props {
 const LegalNeed: React.FC<Props> = ({ caseDetails: caseData, caseQuestions: questionData, 
     caseRepresentation: repData, caseSignature: signData }) => {
     
+    const { successMessage } = usePage().props;
     // const approveLegalNeed = (e: FormEvent) => {
     //     e.preventDefault();
         
@@ -24,6 +25,7 @@ const LegalNeed: React.FC<Props> = ({ caseDetails: caseData, caseQuestions: ques
 
     return (
         <div className="container mx-auto mt-8">
+            
             <h2 className="text-2xl font-bold mb-4">Case Details</h2>
             <form className="space-y-4">
                 {/* Case Information */}
@@ -149,8 +151,7 @@ const LegalNeed: React.FC<Props> = ({ caseDetails: caseData, caseQuestions: ques
                 </div>
 
                 {/* Submit button */}
-                <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-colors">Approve</button>
-                <Link href={route('cases.grab', { CaseID: caseData.CaseID })} method="post" as="button" className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-colors">
+                <Link href={route('cases.approve', { CaseID: caseData.CaseID })} method="post" as="button" className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-colors">
                     Approve
                 </Link>
             </form>

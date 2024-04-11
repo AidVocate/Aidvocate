@@ -46,7 +46,9 @@ class PBOController extends Controller
         $case->update(['Approved' => 1]);
 
         // Redirect back with success message
-        return redirect()->back()->with('success', 'Case approved successfully.');
+        return Inertia::render('pbo/ViewLegalNeed/', [
+            'successMessage' => 'Your success message here'
+        ]);
     }
 
     public function CaseList()
