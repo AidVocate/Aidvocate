@@ -72,9 +72,11 @@ export default function NavBar({ routes }: Props) {
           <nav className="my-auto flex flex-1 justify-end hidden sm:flex">
             {routes && routes.map((routeInfo) => (
               <Link
+                  key={routeInfo.name + "-Link"}
                   href={route(routeInfo.route)}
                   {...(routeInfo.post && { method: "post" })}
-                  className="ml-6 no-underline text-white hover:text-blue-100 hover:underline"
+                  {...(routeInfo.post && { as: "button" })}
+                  className="font-sans m-0 p-0 ml-6 no-underline text-white hover:text-blue-100 hover:underline appearance-none border-none bg-transparent text-base"
               >
                 {routeInfo.name}
               </Link>
@@ -113,12 +115,13 @@ export default function NavBar({ routes }: Props) {
       onClose={handleClose}
     >
        {routes && routes.map((routeInfo) => (
-        <MenuItem disableRipple>
+        <MenuItem key={routeInfo.name + "-MenuItem"} disableRipple>
           <LinkIcon name={routeInfo.name}/>
           <Link
               href={route(routeInfo.route)}
               {...(routeInfo.post && { method: "post" })}
-              className="ml-6 no-underline text-black hover:text-blue-900 hover:underline"
+              {...(routeInfo.post && { as: "button" })}
+              className="font-sans m-0 p-0 ml-6 no-underline text-black hover:text-blue-900 hover:underline appearance-none border-none bg-transparent text-base"
           >
             {routeInfo.name}
           </Link>
