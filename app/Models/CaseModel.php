@@ -21,7 +21,6 @@ class CaseModel extends Model
         'ServicesLanguage',
         'AdditionalInformation',
         'Approved',
-        'AssignedID',
     ];
 
     // Define the relationship with CaseQuestions
@@ -45,8 +44,9 @@ class CaseModel extends Model
         return $this->belongsTo(CaseModel::class, 'id');
     }
 
-    public function AssignedLawyer()
+    public function AssinedLawyer()
     {
-        return $this->belongsTo(AssignedLawyer::class, 'AssignedID');
+        return $this->hasOne(AssignedLawyer::class, 'CaseID');
     }
+
 }

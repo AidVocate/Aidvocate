@@ -26,6 +26,17 @@ class ProfileUpdateRequest extends FormRequest
             'Phone' => ['required', 'string', 'max:255','regex:/^[2-9]\d{2}-\d{3}-\d{4}$/'],
             'VoiceMail' => ['boolean'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(User::class)->ignore($this->user()->id)],
+            'DateOfNextAppearance' => ['required', 'date', 'after_or_equal:today'],
+            'NatureOfAppearance' => ['required', 'string'],
+            'ServicesLanguage' => ['nullable', 'string'],
+            'AdditionalInformation' => ['nullable', 'string'],
+            'Question1' => ['required', 'string'],
+            'Question2' => ['nullable', 'string'],
+            'Question3' => ['nullable', 'string'],
+            'ReasonForChange' => ['required', 'string'],
+            'Signature' => ['required', 'string'],
+            'PrintName' => ['required', 'string'],
+            'SignDate' => ['required', 'date'],
         ];
     }
 }

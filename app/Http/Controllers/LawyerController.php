@@ -45,28 +45,34 @@ class LawyerController extends Controller
     }
 
     // Controller Method to Grab Case
-    // Controller Method to Grab Case
     public function grabCase($CaseID)
     {
-        // Find the case by its ID
-        $case = CaseModel::findOrFail($CaseID);
+        // Get the currently authenticated user
+        $user = auth()->user();
+        $assignedLawyerId = $user->id; // Get the ID of the authenticated user
 
-        // Check if the case is already assigned to a lawyer
-        if ($case->AssignedID !== null) {
-            return redirect()->back()->with('error', 'This case is already assigned to a lawyer.');
+        $existingAssignment = AssignedLawyer::where('CaseID', $CaseID)
+            ->where('id', $assignedLawyerId)
+            ->first();
+
+        if ($existingAssignment) {
+            // The case is already assigned to the current user
+            return redirect()->back()->with('flash', [
+                'type' => 'error',
+                'message' => 'This case is already assigned to you.'
+            ]);
         }
-        $assignedLawyerId = Auth::id();
+
+
 
         // Create a new record in the AssignedLawyer table
-       $assignedLawyer = AssignedLawyer::create([
-        'id' => $assignedLawyerId,
-        // Add other fields if needed
-    ]);
-            $assignedId = $assignedLawyer->AssignedID;
-
-        // Update the AssignedID column in the Case table
-    $case->update(['AssignedID' => $assignedId]);
-
-        return redirect()->back()->with('success', 'Case successfully grabbed.');
+        AssignedLawyer::create([
+            'id' => $assignedLawyerId,
+            'CaseID' => $CaseID,
+        ]);
+        return redirect()->back()->with('flash', [
+            'type' => 'success',
+            'message' => 'Case successfully grabbed.'
+        ]);
     }
 }

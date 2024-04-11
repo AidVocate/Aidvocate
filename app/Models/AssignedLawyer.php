@@ -13,6 +13,7 @@ class AssignedLawyer extends Model
 
     protected $fillable = [
         'id',
+        'CaseID',
         'Approved',
     ];
 
@@ -21,8 +22,8 @@ class AssignedLawyer extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function cases()
-    {
-        return $this->hasMany(CaseModel::class, 'AssignedID');
-    }
+   public function case()
+   {
+    return $this->belongsTo(CaseModel::class);
+   }
 }

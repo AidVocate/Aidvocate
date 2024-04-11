@@ -1,10 +1,21 @@
-import React, { FormEvent, useState } from 'react';
-import { useForm } from '@inertiajs/inertia-react';
+import { FormEvent } from 'react';
+import { Head, Link, useForm } from '@inertiajs/react';
 import InputError from '@/Components/InputError';
+import PrimaryButton from '@/Components/PrimaryButton';
+import TextInput from '@/Components/TextInput';
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import { TextareaAutosize } from '@mui/base/TextareaAutosize';
 
 
-const CreateLegalNeed = () => {
-    const { data, setData, post, errors } = useForm({
+
+
+interface Props extends inertia.Auth {
+    mustVerifyEmail: boolean;
+    status?: 'verification-link-sent';
+}
+export default function CreateLegalNeed({ auth }: Props) {
+
+    const { data, setData, post, processing, errors } = useForm({
         DateOfNextAppearance: '',
         NatureOfAppearance: '',
         ServicesLanguage: '',
@@ -15,7 +26,7 @@ const CreateLegalNeed = () => {
         ReasonForChange: '',
         Signature: '',
         PrintName: '',
-        SignDate: ''
+        SignDate: new Date().toISOString().slice(0, 10) // Set initial value to today's date
 
     });
 
@@ -25,135 +36,170 @@ const CreateLegalNeed = () => {
     };
 
     return (
-        <div className="container mx-auto mt-8">
-            <h2 className="text-2xl font-bold mb-4">Legal Need Form</h2>
-            <form onSubmit={handleSubmit} className="space-y-4">
-                {/* Case Information */}
-                <div>
-                    <label className="block mb-1">Date of Next Appearance *</label>
-                    <input
-                        type="date"
-                        name="DateOfNextAppearance"
-                        value={data.DateOfNextAppearance}
-                        onChange={(e: ChangeEvent) => setData('DateOfNextAppearance', e.target.value)}
-                        
-                        className="border border-gray-300 rounded px-4 py-2 w-full"
-                    />
-                    <InputError message={errors.DateOfNextAppearance} className="mt-2" />
-                </div>
-                <div>
-                    <label className="block mb-1">Nature of Appearance *</label>
-                    <input
-                        type="text"
-                        name="NatureOfAppearance"
-                        value={data.NatureOfAppearance}
-                        onChange={(e) => setData('NatureOfAppearance', e.target.value)}
-                        
-                        className="border border-gray-300 rounded px-4 py-2 w-full"
-                    />
-                    <InputError message={errors.NatureOfAppearance} className="mt-2" />
+        <AuthenticatedLayout
+            user={auth.user}
+            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Create Legal Need</h2>}
+        >
+            <Head title="CreateLegalNeed" />
+            <div className="py-12">
+                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
 
-                </div>
-                <div>
-                    <label className="block mb-1">Service Language</label>
-                    <input
-                        type="text"
-                        name="ServicesLanguage"
-                        value={data.ServicesLanguage}
-                        onChange={(e) => setData('ServicesLanguage', e.target.value)}
-                        className="border border-gray-300 rounded px-4 py-2 w-full"
-                    />
-                </div>
-                <div>
-                    <label className="block mb-1">Additional Information</label>
-                    <textarea
-                        name="AdditionalInformation"
-                        value={data.AdditionalInformation}
-                        onChange={(e) => setData('AdditionalInformation', e.target.value)}
-                        className="border border-gray-300 rounded px-4 py-2 w-full"
-                    />
-                </div>
+                    <div className="container mx-auto mt-8">
+                        <form onSubmit={handleSubmit} className="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+                            {/* Case Information */}
+                            <div className="mt-4">
+                                <InputError message={errors.NatureOfAppearance} className="mt-2" />
+                                <label className="block mb-1">What is the nature of that appearance? </label>
+                                <TextInput
+                                    type="text"
+                                    id="NatureOfAppearance"
+                                    name="NatureOfAppearance"
+                                    value={data.NatureOfAppearance}
+                                    onChange={(e: ChangeEvent) => setData('NatureOfAppearance', e.target.value)}
 
-                {/* Case Questions */}
-                <div>
-                    <label className="block mb-1">Question 1</label>
-                    <input
-                        type="text"
-                        name="Question1"
-                        value={data.Question1}
-                        onChange={(e) => setData('Question1', e.target.value)}
-                        className="border border-gray-300 rounded px-4 py-2 w-full"
-                    />
-                </div>
-                <div>
-                    <label className="block mb-1">Question 2</label>
-                    <input
-                        type="text"
-                        name="Question2"
-                        value={data.Question2}
-                        onChange={(e) => setData('Question2', e.target.value)}
-                        className="border border-gray-300 rounded px-4 py-2 w-full"
-                    />
-                </div>
-                <div>
-                    <label className="block mb-1">Question 3</label>
-                    <input
-                        type="text"
-                        name="Question3"
-                        value={data.Question3}
-                        onChange={(e) => setData('Question3', e.target.value)}
-                        className="border border-gray-300 rounded px-4 py-2 w-full"
-                    />
-                </div>
+                                    className="border border-gray-300 rounded px-4 py-2 w-full"
+                                />
 
-                {/* Legal Representation */}
-                <div>
-                    <label className="block mb-1">Reason for Change</label>
-                    <input
-                        type="text"
-                        name="ReasonForChange"
-                        value={data.ReasonForChange}
-                        onChange={(e) => setData('ReasonForChange', e.target.value)}
-                        className="border border-gray-300 rounded px-4 py-2 w-full"
-                    />
-                </div>
+                            </div>
+                            <div className="mt-4">
+                                <InputError message={errors.DateOfNextAppearance} className="mt-2" />
+                                <label className="block mb-1">What is the date of your next appearance before a Judge?</label>
+                                <TextInput
+                                    id="DateOfNextAppearance"
+                                    name="DateOfNextAppearance"
+                                    type="date"
+                                    value={data.DateOfNextAppearance}
+                                    onChange={(e: ChangeEvent) => setData('DateOfNextAppearance', e.target.value)}
 
-                <div>
-                    <label className="block mb-1">Signature</label>
-                    <input
-                        type="text"
-                        name="Signature"
-                        value={data.Signature}
-                        onChange={(e) => setData('Signature', e.target.value)}
-                        className="border border-gray-300 rounded px-4 py-2 w-full"
-                    />
-                </div>
-                <div>
-                    <label className="block mb-1">Print Name</label>
-                    <input
-                        type="text"
-                        name="PrintName"
-                        value={data.PrintName}
-                        onChange={(e) => setData('PrintName', e.target.value)}
-                        className="border border-gray-300 rounded px-4 py-2 w-full"
-                    />
-                </div>
-                <div>
-                    <label className="block mb-1">Sign Date</label>
-                    <input
-                        type="date"
-                        name="SignDate"
-                        value={data.SignDate}
-                        onChange={(e) => setData('SignDate', e.target.value)}
-                        className="border border-gray-300 rounded px-4 py-2 w-full"
-                    />
-                </div>
+                                    className="border border-gray-300 rounded px-4 py-2 w-full"
+                                />
 
-                {/* Submit button */}
-                <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-colors">Submit</button>
-            </form>
-        </div>
+                            </div>
+
+                            <div className="mt-4">
+                                <InputError message={errors.ServicesLanguage} className="mt-2" />
+                                <label className="block mb-1">Service Language?</label>
+                                <TextInput
+                                    type="text"
+                                    id="ServicesLanguage"
+                                    name="ServicesLanguage"
+                                    value={data.ServicesLanguage}
+                                    onChange={(e: ChangeEvent) => setData('ServicesLanguage', e.target.value)}
+                                    className="border border-gray-300 rounded px-4 py-2 w-full"
+                                />
+                            </div>
+                            <div className="mt-4">
+
+                                <label className="block mb-1">Additional Information</label>
+                                <span>In one sentence, briefly tell us what your case is about.
+                                    Why are you suing or being sued?</span>
+                                <TextareaAutosize
+                                    name="AdditionalInformation"
+                                    value={data.AdditionalInformation}
+                                    onChange={(e: ChangeEvent) => setData('AdditionalInformation', e.target.value)}
+                                    className="border border-gray-300 rounded px-4 py-2 w-full"
+                                />
+                            </div>
+
+                            {/* Case Questions */}
+                            <div className="mt-4">
+                                <span>What are your 3 main questions?</span>
+
+                                <InputError message={errors.Question1} className="mt-2" />
+                                <label className="block mb-1">Question 1</label>
+                                <TextInput
+                                    id="Question1"
+                                    name="Question1"
+                                    value={data.Question1}
+                                    onChange={(e: ChangeEvent) => setData('Question1', e.target.value)}
+                                    className="border border-gray-300 rounded px-4 py-2 w-full"
+                                />
+                            </div>
+                            <div className="mt-4">
+                                <label className="block mb-1">Question 2</label>
+                                <TextInput
+                                    type="text"
+                                    name="Question2"
+                                    value={data.Question2}
+                                    onChange={(e: ChangeEvent) => setData('Question2', e.target.value)}
+                                    className="border border-gray-300 rounded px-4 py-2 w-full"
+                                />
+                            </div>
+                            <div className="mt-4">
+                                <label className="block mb-1">Question 3</label>
+                                <TextInput
+                                    type="text"
+                                    name="Question3"
+                                    value={data.Question3}
+                                    onChange={(e: ChangeEvent) => setData('Question3', e.target.value)}
+                                    className="border border-gray-300 rounded px-4 py-2 w-full"
+                                />
+                            </div>
+
+                            {/* Legal Representation */}
+                            <div className="mt-4">
+                                <span>Do you currently have a
+                                    lawyer or other
+                                    representative currently
+                                    helping you with this case?
+
+                                </span>
+                                <label className="block mb-1"><b>If yes,</b> why is that lawyer
+                                    no longer assisting you?</label>
+                                <TextInput
+                                    type="text"
+                                    name="ReasonForChange"
+                                    value={data.ReasonForChange}
+                                    onChange={(e: ChangeEvent) => setData('ReasonForChange', e.target.value)}
+                                    className="border border-gray-300 rounded px-4 py-2 w-full"
+                                />
+                            </div>
+
+                            <div className="mt-4">
+                                <label className="block mb-1">Signature</label>
+                                <TextInput
+                                    type="text"
+                                    name="Signature"
+                                    value={data.Signature}
+                                    onChange={(e: ChangeEvent) => setData('Signature', e.target.value)}
+                                    className="border border-gray-300 rounded px-4 py-2 w-full"
+                                />
+                            </div>
+                            <div className="mt-4">
+                                <label className="block mb-1">Print Name</label>
+                                <TextInput
+                                    type="text"
+                                    name="PrintName"
+                                    value={data.PrintName}
+                                    onChange={(e: ChangeEvent) => setData('PrintName', e.target.value)}
+                                    className="border border-gray-300 rounded px-4 py-2 w-full"
+                                />
+                            </div>
+                            <div className="mt-4">
+                                <label className="block mb-1">Sign Date</label>
+                                <TextInput
+                                    id="SignDate"
+                                    type="date"
+                                    name="SignDate"
+                                    value={data.SignDate}
+                                    onChange={(e: ChangeEvent) => setData('SignDate', e.target.value)}
+                                    className="border border-gray-300 rounded px-4 py-2 w-full"
+                                    disabled />
+                            </div>
+
+                            <div className='mt-6 flex items-center justify-end gap-x-6'>
+                            <PrimaryButton className="ms-4" disabled={processing}>
+                                Create
+                            </PrimaryButton>
+                            </div>
+                           
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </AuthenticatedLayout>
+
     );
 };
 
-export default CreateLegalNeed;
