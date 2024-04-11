@@ -3,7 +3,7 @@ import Link from '@mui/material/Link';
 
 export default function Footer() {
   return (
-    <footer className="py-16 text-center text-sm text-black dark:text-white/70">
+    <footer className="py-16 text-center text-sm text-black">
       <Typography variant="body2" color="text.secondary">
           {'Copyright © '}
           <Link color="inherit" href="https://www.gozaround.com/">
