@@ -37,6 +37,18 @@ class PBOController extends Controller
         ]);
     }
 
+    public function ApproveLegalNeed($caseID)
+    {
+        // Find the case by its ID
+        $case = CaseModel::findOrFail($caseID);
+
+        // Update the 'Approved' column to true
+        $case->update(['Approved' => 1]);
+
+        // Redirect back with success message
+        return redirect()->back()->with('success', 'Case approved successfully.');
+    }
+
     public function CaseList()
     {
         // Retrieve all cases that are not approved

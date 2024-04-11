@@ -17,6 +17,10 @@ const LegalNeed: React.FC<Props> = ({ caseDetails: caseData, caseQuestions: ques
     
     const approveLegalNeed = (e: FormEvent) => {
         e.preventDefault();
+        
+        const post = Link
+        
+        post(route('approveLegalNeed'));
     };
 
     return (
@@ -139,7 +143,7 @@ const LegalNeed: React.FC<Props> = ({ caseDetails: caseData, caseQuestions: ques
                     <input
                         type="text"
                         name="SignDate"
-                        value={signData.SignDate}
+                        value={signData?.SignDate ?? 'N/A'}
                         readOnly
                         className="border border-gray-300 rounded px-4 py-2 w-full"
                     />
