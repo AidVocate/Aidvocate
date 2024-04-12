@@ -37,7 +37,6 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
         <section className={className}>
             <header>
                 <h2 className="text-lg font-medium text-gray-900">Profile Information</h2>
-
                 <p className="mt-1 text-sm text-gray-600">
                     Update your account's profile information and email address.
                 </p>
@@ -69,7 +68,6 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                         value={data.FirstName}
                         onChange={(e: ChangeEvent) => setData('FirstName', e.target.value)}
                         required
-                        isFocused
                         autoComplete="FirstName"
                     />
 
@@ -85,7 +83,6 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                         value={data.LastName}
                         onChange={(e: ChangeEvent) => setData('LastName', e.target.value)}
                         required
-                        isFocused
                         autoComplete="LastName"
                     />
 
@@ -117,7 +114,6 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                         value={data.Address1}
                         onChange={(e: ChangeEvent) => setData('Address1', e.target.value)}
                         required
-                        isFocused
                         autoComplete="Address1"
                     />
 
@@ -133,7 +129,6 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                         className="mt-1 block w-full"
                         value={data.Address2}
                         onChange={(e: ChangeEvent) => setData('Address2', e.target.value)}
-                        isFocused
                         autoComplete="Address2"
                     />
 
@@ -149,7 +144,6 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                         value={data.City}
                         onChange={(e: ChangeEvent) => setData('City', e.target.value)}
                         required
-                        isFocused
                         autoComplete="City"
                     />
 
@@ -166,7 +160,6 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                         value={data.Province}
                         onChange={(e: ChangeEvent) => setData('Province', e.target.value)}
                         required
-                        isFocused
                         autoComplete="Province"
                     />
 
@@ -183,7 +176,6 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                         value={data.PostalCode}
                         onChange={(e: ChangeEvent) => setData('PostalCode', e.target.value)}
                         required
-                        isFocused
                         autoComplete="PostalCode"
                     />
 
@@ -199,7 +191,6 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                         value={data.Phone}
                         onChange={(e: ChangeEvent) => setData('Phone', e.target.value)}
                         required
-                        isFocused
                         autoComplete="Phone"
                     />
 
@@ -215,7 +206,6 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                         checked={data.VoiceMail} // Use checked instead of value
                         className="mt-1"
                         autoComplete="VoiceMail"
-                        isFocused={true}
                         onChange={(e: ChangeEvent) => setData('VoiceMail', e.target.checked)} // Use e.target.checked
                     />
 

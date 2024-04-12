@@ -7,7 +7,7 @@ interface Props extends ClassName, AnyProps {
 
 type InputRef = LegacyRef<HTMLInputElement> | RefObject<HTMLInputElement>;
 
-export default forwardRef(function TextInput({ type = 'text', className = '', isFocused = false, ...props }: Props, ref: InputRef) {
+export default forwardRef(function TextInput({ type = 'text', className = '', isFocused = false, value="", ...props }: Props, ref: InputRef) {
     const input: InputRef = ref ? ref : createRef<HTMLInputElement>();
 
     useEffect(() => {
@@ -25,6 +25,7 @@ export default forwardRef(function TextInput({ type = 'text', className = '', is
     return (
         <input
             {...props}
+            value={value ?? ""}
             type={type}
             className={
                 'border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm ' +
