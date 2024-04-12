@@ -27,7 +27,7 @@ const LegalNeed: React.FC<Props> = ({ caseDetails: caseData, caseQuestions: ques
     return (
         <AuthenticatedLayout
             user={auth.user}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Legal Need Board</h2>}
+            header={"Legal Need Board"}
         >
 
             <Head title="Legal Need Board" />

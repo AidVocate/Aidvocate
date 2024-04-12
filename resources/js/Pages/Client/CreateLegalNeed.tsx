@@ -38,7 +38,7 @@ export default function CreateLegalNeed({ auth }: Props) {
     return (
         <AuthenticatedLayout
             user={auth.user}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Create Legal Need</h2>}
+            header={"Create Legal Need"}
         >
             <Head title="CreateLegalNeed" />
             <div className="py-12">

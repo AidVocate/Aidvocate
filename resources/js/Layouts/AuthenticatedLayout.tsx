@@ -1,13 +1,14 @@
 import NavBar from '@/Components/NavBar';
 import Footer from '@/Components/Footer';
+import Typography from '@mui/material/Typography';
+import Divider from '@mui/material/Divider';
 
 interface Props extends Children {
     user: inertia.User,
-    header: JSX.Element,
+    header: string,
 }
 
 export default function Authenticated({ user, header, children }: Props) {
-
     return (
         <>
             <NavBar
@@ -17,7 +18,9 @@ export default function Authenticated({ user, header, children }: Props) {
                     {name: "Logout", route: "logout", post: true},
                 ]}
             />
-            <div className="max-w-7xl mx-auto py-1 px-4 sm:px-6 lg:px-8">{header}</div>
+            <Divider>
+                <Typography color='primary' className='font-bold' variant='h4'>{header}</Typography>
+            </Divider>
             <main>{children}</main>
             <Footer/>
         </>
