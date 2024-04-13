@@ -14,14 +14,6 @@ interface Props {
 
 const LegalNeed: React.FC<Props> = ({ caseDetails: caseData, caseQuestions: questionData, 
     caseRepresentation: repData, caseSignature: signData }) => {
-    
-    const { successMessage } = usePage().props;
-    // const approveLegalNeed = (e: FormEvent) => {
-    //     e.preventDefault();
-        
-    //     const post = Link
-    //     post(route('approveLegalNeed'));
-    // };
 
     return (
         <div className="container mx-auto mt-8">
