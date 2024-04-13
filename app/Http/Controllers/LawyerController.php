@@ -21,20 +21,54 @@ class LawyerController extends Controller
         return Inertia::render('Lawyer/Index');
     }
 
-    public function CaseList()
+    public function CaseList(Request $request)
     {
-        // Retrieve all cases that are not approved and not assigned to a lawyer
-        $cases = CaseModel::where('Approved', true)
-                         ->whereNotIn('CaseID', function ($query) {
-                             $query->select('CaseID')
-                                   ->from('AssignedLawyer');
-                         })
-                         ->paginate(10);
+        // // Retrieve all cases that are not approved and not assigned to a lawyer
+        // $cases = CaseModel::where('Approved', true)
+        //                  ->whereNotIn('CaseID', function ($query) {
+        //                      $query->select('CaseID')
+        //                            ->from('AssignedLawyer');
+        //                  })
+        //                  ->paginate(10);
     
-        // Return the view with the cases data
-        return inertia('Lawyer/ViewLegalNeedBoard', [
-            'cases' => $cases
-        ]);
+        // // Return the view with the cases data
+        // return inertia('Lawyer/ViewLegalNeedBoard', [
+        //     'cases' => $cases
+        // ]);
+
+        // Retrieve search parameters from the request
+    $searchTerm = $request->input('search');
+
+    // Query to retrieve all cases that are not approved and not assigned to a lawyer
+    $query = CaseModel::where('Approved', true)
+                      ->whereNotIn('CaseID', function ($query) {
+                          $query->select('CaseID')
+                                ->from('AssignedLawyer');
+                      });
+
+    // Apply search filter if search term is provided
+    if ($searchTerm) {
+        $query->where(function($query) use ($searchTerm) {
+            $query->where('DateOfNextAppearance', 'LIKE', "%$searchTerm%")
+                  ->orWhere('NatureOfAppearance', 'LIKE', "%$searchTerm%")
+                  ->orWhereHas('CaseQuestions', function($subQuery) use ($searchTerm) {
+                      $subQuery->where('Question1', 'LIKE', "%$searchTerm%")
+                               ->orWhere('Question2', 'LIKE', "%$searchTerm%")
+                               ->orWhere('Question3', 'LIKE', "%$searchTerm%");
+                  })
+                  ->orWhereHas('LegalRepresentation', function($subQuery) use ($searchTerm) {
+                      $subQuery->where('ReasonForChange', 'LIKE', "%$searchTerm%");
+                  });
+        });
+    }
+
+    // Paginate the results
+    $cases = $query->paginate(10);
+
+    // Return the view with the cases data
+    return inertia('Lawyer/ViewLegalNeedBoard', [
+        'cases' => $cases
+    ]);
     }
 
     public function ViewLegalNeed($CaseID)
@@ -104,22 +138,52 @@ class LawyerController extends Controller
         ]);
     }
 
-    public function LawyerCaseList()
-    {
-        // Get the ID of the currently logged-in lawyer
-        $lawyerId = auth()->id();
+    // public function LawyerCaseList()
+    // {
+    //     // Get the ID of the currently logged-in lawyer
+    //     $lawyerId = auth()->id();
     
-        // Retrieve cases assigned to the current lawyer along with Approved and Case_Close statuses
-        $cases = CaseModel::select('Case.*', 'AssignedLawyer.Approved', 'AssignedLawyer.Case_Close')
-            ->leftJoin('AssignedLawyer', 'Case.CaseID', '=', 'AssignedLawyer.CaseID')
-            ->where('AssignedLawyer.id', $lawyerId)
-            ->paginate(10);
+    //     // Retrieve cases assigned to the current lawyer along with Approved and Case_Close statuses
+    //     $cases = CaseModel::select('Case.*', 'AssignedLawyer.Approved', 'AssignedLawyer.Case_Close')
+    //         ->leftJoin('AssignedLawyer', 'Case.CaseID', '=', 'AssignedLawyer.CaseID')
+    //         ->where('AssignedLawyer.id', $lawyerId)
+    //         ->paginate(10);
     
-        // Return the view with the cases data
-        return inertia('Lawyer/LawyerCases', [
-            'cases' => $cases
-        ]);
+    //     // Return the view with the cases data
+    //     return inertia('Lawyer/LawyerCases', [
+    //         'cases' => $cases
+    //     ]);
+    // }
+
+    public function LawyerCaseList(Request $request)
+{
+    // Get the ID of the currently logged-in lawyer
+    $lawyerId = auth()->id();
+    
+    // Retrieve cases assigned to the current lawyer along with Approved and Case_Close statuses
+    $query = CaseModel::select('Case.*', 'AssignedLawyer.Approved', 'AssignedLawyer.Case_Close')
+        ->leftJoin('AssignedLawyer', 'Case.CaseID', '=', 'AssignedLawyer.CaseID')
+        ->where('AssignedLawyer.id', $lawyerId);
+
+    // Check if a search term is provided
+    if ($request->has('search')) {
+        $searchTerm = $request->input('search');
+        $query->where(function ($q) use ($searchTerm) {
+            $q->where('Case.CaseID', 'like', "%$searchTerm%")
+              ->orWhere('Case.some_field', 'like', "%$searchTerm%") // Add more fields as needed
+              ->orWhere('AssignedLawyer.Approved', 'like', "%$searchTerm%")
+              ->orWhere('AssignedLawyer.Case_Close', 'like', "%$searchTerm%");
+        });
     }
+
+    $cases = $query->paginate(10);
+
+    // Return the view with the cases data
+    return inertia('Lawyer/LawyerCases', [
+        'cases' => $cases
+    ]);
+}
+
 
     public function LawyerCase($CaseID)
     {

@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { CaseModel } from '../../Components/CaseModel';
-import { AssignedLawyer } from '../../Components/ViewLegalNeedModels/AssignedLawyerModel'; // Assuming this is the correct import path
+import { AssignedLawyer } from '../../Components/ViewLegalNeedModels/AssignedLawyerModel';
 import { Inertia } from '@inertiajs/inertia';
 import { usePage } from '@inertiajs/react';
 import Table from '@mui/material/Table';
@@ -11,6 +11,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField'; // Import TextField from Material-UI
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 
@@ -28,19 +29,34 @@ interface PaginatedResponse<T> {
 }
 
 interface Props extends inertia.Auth {
-  cases: PaginatedResponse<AssignedLawyer & CaseModel>; // Merge properties from both models
+  cases: PaginatedResponse<AssignedLawyer & CaseModel>;
   mustVerifyEmail: boolean;
   status?: 'verification-link-sent';
 }
 
 const ApprovedList = ({ auth, cases }: Props) => {
+  const [searchTerm, setSearchTerm] = useState<string>(''); // State for search term
+
+  // Handler for handling button click
   const handleButtonClick = (caseID: number) => {
     navigateToDifferentPage(caseID);
   };
 
+  // Handler for navigating to different page
   const navigateToDifferentPage = (caseID: number) => {
     window.location.href = `/lawyer/LawyerCase/${caseID}`;
   };
+
+// Filter cases based on search term
+const filteredCases = cases.data.filter((item) => {
+  // Filter by CaseID, DateOfNextAppearance, NatureOfAppearance, Approved, and Case_Close
+  return (
+    item.DateOfNextAppearance.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    item.NatureOfAppearance.toLowerCase().includes(searchTerm.toLowerCase())
+
+  );
+});
+
 
   return (
     <AuthenticatedLayout
@@ -50,6 +66,16 @@ const ApprovedList = ({ auth, cases }: Props) => {
       <Head title="Legal Need Board" />
       <div className="py-12">
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+          {/* Search input */}
+          <TextField
+            label="Search"
+            variant="outlined"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            fullWidth
+            margin="normal"
+          />
+
           <TableContainer component={Paper}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
               <TableHead>
@@ -57,20 +83,20 @@ const ApprovedList = ({ auth, cases }: Props) => {
                   <TableCell>View</TableCell>
                   <TableCell>Date Of Next Appearance</TableCell>
                   <TableCell>Nature of Appearance</TableCell>
-                  <TableCell>Approved</TableCell> {/* New column */}
-                  <TableCell>Case Close</TableCell> {/* New column */}
+                  <TableCell>Approved</TableCell>
+                  <TableCell>Case Close</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {cases.data.map((item) => (
+                {filteredCases.map((item) => (
                   <TableRow key={item.CaseID}>
                     <TableCell>
                       <Button variant="contained" onClick={() => handleButtonClick(item.CaseID)} disabled={!item.Approved}>View</Button>
                     </TableCell>
                     <TableCell>{item.DateOfNextAppearance}</TableCell>
                     <TableCell>{item.NatureOfAppearance}</TableCell>
-                    <TableCell>{item.Approved ? 'Yes' : 'No'}</TableCell> {/* Display 'Yes' or 'No' based on the value of Approved */}
-                    <TableCell>{item.Case_Close ? 'Yes' : 'No'}</TableCell> {/* Display 'Yes' or 'No' based on the value of Case_Close */}
+                    <TableCell>{item.Approved ? 'Yes' : 'No'}</TableCell>
+                    <TableCell>{item.Case_Close ? 'Yes' : 'No'}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
