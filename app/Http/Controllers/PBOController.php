@@ -79,6 +79,7 @@ class PBOController extends Controller
         $case->update(['Approved' => 1]);
 
         // Redirect back with success message
-        return redirect()->back()->with('success', 'The Legal Need has been Approved!'); 
+        return redirect('/pbo/ViewLegalNeedBoard');
+ 
     }
 }
