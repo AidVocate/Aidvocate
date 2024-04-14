@@ -128,10 +128,10 @@ const LegalNeed: React.FC<Props> = ({ caseDetails: caseData, caseQuestions: ques
                         </div>
                     </div>
 
-                    {/* Approve Button */}
-                    <button type="button" className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                    {/* Submit button */}
+                    <Link href={route('cases.approve', { CaseID: caseData.CaseID })} method="post" as="button" className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-colors">
                         Approve
-                    </button>
+                    </Link>
                 </div>
             </div>
 
