@@ -39,19 +39,19 @@ const LegalNeed: React.FC<Props> = ({ caseDetails: caseData, caseQuestions: ques
                     <div className="space-y-2">
                         <div>
                             <label className="block mb-1 font-medium text-gray-600">Name</label>
-                            <div className="p-2 bg-white border rounded">{CasePerson.FirstName} {CasePerson.LastName}</div>
+                            <div className="p-2 bg-white border rounded">{CasePerson?.FirstName ?? 'N/A'} {CasePerson?.LastName ?? 'N/A'}</div>
                         </div>
                         <div>
                             <label className="block mb-1 font-medium text-gray-600">Email</label>
-                            <div className="p-2 bg-white border rounded">{CasePerson.email}</div>
+                            <div className="p-2 bg-white border rounded">{CasePerson?.email ?? 'N/A'}</div>
                         </div>
                         <div>
                             <label className="block mb-1 font-medium text-gray-600">Phone Number</label>
-                            <div className="p-2 bg-white border rounded">{CasePerson.Phone}</div>
+                            <div className="p-2 bg-white border rounded">{CasePerson?.Phone ?? 'N/A'}</div>
                         </div>
                         <div>
                             <label className="block mb-1 font-medium text-gray-600">Are they able to leave them a voice mail</label>
-                            <div className="p-2 bg-white border rounded">{CasePerson.VoiceMail ? 'Yes' : 'No'}</div>
+                            <div className="p-2 bg-white border rounded">{CasePerson?.VoiceMail ? 'Yes' : 'No'}</div>
                         </div>
                     </div>
                 </div>
@@ -64,19 +64,19 @@ const LegalNeed: React.FC<Props> = ({ caseDetails: caseData, caseQuestions: ques
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label className="block mb-1 font-medium text-gray-600">Date of Next Appearance</label>
-                                <div className="p-2 bg-white border rounded">{caseData.DateOfNextAppearance}</div>
+                                <div className="p-2 bg-white border rounded">{caseData?.DateOfNextAppearance ?? 'N/A'}</div>
                             </div>
                             <div>
                                 <label className="block mb-1 font-medium text-gray-600">Nature of Appearance</label>
-                                <div className="p-2 bg-white border rounded">{caseData.NatureOfAppearance}</div>
+                                <div className="p-2 bg-white border rounded">{caseData?.NatureOfAppearance ?? 'N/A'}</div>
                             </div>
                             <div>
                                 <label className="block mb-1 font-medium text-gray-600">Service Language</label>
-                                <div className="p-2 bg-white border rounded">{caseData.ServicesLanguage}</div>
+                                <div className="p-2 bg-white border rounded">{caseData?.ServicesLanguage ?? 'N/A'}</div>
                             </div>
                             <div>
                                 <label className="block mb-1 font-medium text-gray-600">Additional Information</label>
-                                <div className="p-2 bg-white border rounded">{caseData.AdditionalInformation}</div>
+                                <div className="p-2 bg-white border rounded">{caseData?.AdditionalInformation ?? 'N/A'}</div>
                             </div>
                         </div>
                     </div>
