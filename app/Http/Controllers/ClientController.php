@@ -126,4 +126,71 @@ class ClientController extends Controller
         // Optionally, you can return a response indicating success
         return redirect(route('dashboard', absolute: false));
     }
+
+    public function ViewLegalNeed($userID): \Inertia\Response
+    {
+        // Retrieve the legal needs for the specified user
+        $caseDetails = CaseModel::where('id', $userID)
+            ->with('caseQuestions', 'legalRepresentation', 'signature')
+            ->first();
+
+        // Pass the retrieved legal needs data to the view
+        return Inertia::render('Client/ViewLegalNeed', [
+            'caseDetails' => $caseDetails,
+            'caseQuestions' => $caseDetails->caseQuestions,
+            'caseRepresentation' => $caseDetails->legalRepresentation,
+            'caseSignature' => $caseDetails->signature,
+            'auth' => Auth::user()
+        ]);
+    }
+
+    public function UpdateLegalNeed(Request $request, $userID, $caseID): RedirectResponse
+    {
+        //Retrieve the case model
+        $case = CaseModel::where('id', $userID)->findOrFail($caseID);
+
+        // Define validation rules for updating legal needs
+        $request->validate([
+            'DateOfNextAppearance' => ['required', 'date', 'after_or_equal:today'],
+            'NatureOfAppearance' => ['required', 'string'],
+            'ServicesLanguage' => ['nullable', 'string'],
+            'AdditionalInformation' => ['nullable', 'string'],
+            'Question1' => ['required', 'string'],
+            'Question2' => ['nullable', 'string'],
+            'Question3' => ['nullable', 'string'],
+            'ReasonForChange' => ['required', 'string'],
+            'Signature' => ['required', 'string'],
+            'PrintName' => ['required', 'string'],
+            'SignDate' => ['required', 'date']
+        ]);
+
+        // Update the case model
+        $case->update([
+            'DateOfNextAppearance' => $request->DateOfNextAppearance,
+            'NatureOfAppearance' => $request->NatureOfAppearance,
+            'ServicesLanguage' => $request->ServicesLanguage,
+            'AdditionalInformation' => $request->AdditionalInformation,
+        ]);
+
+        // Update case questions
+        $case->caseQuestions->update([
+            'Question1' => $request->Question1,
+            'Question2' => $request->Question2,
+            'Question3' => $request->Question3,
+        ]);
+
+        // Update legal representation
+        $case->legalRepresentation->update([
+            'ReasonForChange' => $request->ReasonForChange,
+        ]);
+
+        // Update signature
+        $case->signature->update([
+            'Signature' => $request->Signature,
+            'PrintName' => $request->PrintName,
+            'SignDate' => $request->SignDate,
+        ]);
+
+        return redirect()->back()->with('success', 'Legal Need updated successfully.');
+    }
 }
