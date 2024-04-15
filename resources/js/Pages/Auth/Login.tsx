@@ -6,6 +6,8 @@ import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Head, Link, useForm } from '@inertiajs/react';
+import Typography from '@mui/material/Typography';
+
 
 interface Props {
     status?: string;
@@ -34,6 +36,7 @@ export default function Login({ status, canResetPassword }: Props) {
     return (
         <GuestLayout>
             <Head title="Log in" />
+            <Typography color='primary' className='font-bold mb-5' variant='h4'>Login</Typography>
 
             {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
 

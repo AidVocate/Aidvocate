@@ -6,6 +6,8 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Head, Link, useForm } from '@inertiajs/react';
 import Checkbox from '@/Components/Checkbox';
+import Typography from '@mui/material/Typography';
+
 
 export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -39,21 +41,21 @@ export default function Register() {
     return (
         <GuestLayout>
             <Head title="Register" />
-
+            <Typography color='primary' className='font-bold' variant='h4'>Register</Typography>
             <form onSubmit={submit}>
 
             <div className="mt-4">
-                    <InputLabel htmlFor="Role" value="Role" />
+                    {/* <InputLabel htmlFor="Role" value="Role" /> */}
 
                     <TextInput
                         id="Role"
                         name="Role"
-                        value={data.Role}
+                        value={data.Role = 'Client'}
                         className="mt-1 block w-full"
                         autoComplete="Role"
                         isFocused={true}
                         onChange={(e: ChangeEvent) => setData('Role', e.target.value)}
-                        required
+                        type="hidden"
                     />
 
                     <InputError message={errors.FirstName} className="mt-2" />
