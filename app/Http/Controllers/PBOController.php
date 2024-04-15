@@ -70,5 +70,16 @@ class PBOController extends Controller
         ]);
     }
     
-    
+    public function ApproveLegalNeed($CaseID)
+    {
+        // Find the case by its ID
+        $case = CaseModel::findOrFail($CaseID);
+
+        // Update the 'Approved' column to true
+        $case->update(['Approved' => 1]);
+
+        // Redirect back with success message
+        return redirect('/pbo/ViewLegalNeedBoard');
+ 
+    }
 }

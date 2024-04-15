@@ -12,6 +12,8 @@ export default function Authenticated({ user, header, children }: Props) {
     return (
         <>
             <NavBar
+                user={user}
+                sidebar={true}
                 routes={[
                     {name: "Dashboard", route: "dashboard"},
                     {name: "Profile", route: "profile.edit"},
@@ -21,7 +23,7 @@ export default function Authenticated({ user, header, children }: Props) {
             <Divider>
                 <Typography color='primary' className='font-bold' variant='h4'>{header}</Typography>
             </Divider>
-            <main>{children}</main>
+            <main className='mx-auto'>{children}</main>
             <Footer/>
         </>
     );

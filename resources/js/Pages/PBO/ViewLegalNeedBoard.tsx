@@ -43,9 +43,9 @@ const LegalNeedList = ({ auth, cases }: Props) => {
   };
   return (
     <AuthenticatedLayout
-    user={auth.user}
-    header={"Legal Need Board"}
-  >
+      user={auth.user}
+      header={"Legal Need Board"}
+    >
     <Head title="Legal Need Board" />
     <div className="py-12">
       <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">

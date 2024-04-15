@@ -5,7 +5,8 @@ import { createRoot } from 'react-dom/client';
 import { createInertiaApp } from '@inertiajs/react';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { StyledEngineProvider, ThemeProvider, createTheme, responsiveFontSizes } from '@mui/material';
-
+import { AlertProvider } from '@/Contexts/AlertContext';
+import { RouteProvider } from '@/Contexts/RouteContext';
 
 const appName = import.meta.env.VITE_APP_NAME || 'AdvocAid';
 
@@ -39,7 +40,11 @@ createInertiaApp({
             <StyledEngineProvider injectFirst>
                 <ThemeProvider theme={theme}>
                     <CssBaseline />
-                    <App {...props} />
+                    <RouteProvider>
+                        <AlertProvider>
+                            <App {...props} />
+                        </AlertProvider>
+                    </RouteProvider>
                 </ThemeProvider>
             </StyledEngineProvider>
         );
