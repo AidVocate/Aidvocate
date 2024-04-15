@@ -1,9 +1,5 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
-import AdminDashboard from './Admin/Index';
-import ClientDashboard from './Client/Index';
-import LawyerDashboard from './Lawyer/Index';
-import PBODashboard from './PBO/Index';
 import Container from '@mui/material/Container';
 import { useRouteContext } from '@/Contexts/RouteContext';
 
