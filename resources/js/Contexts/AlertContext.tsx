@@ -1,13 +1,16 @@
 import { createContext, useState, useContext } from 'react';
 
+type MessageType = "success" | "info" | "warning" | "error"
+
 interface Alert {
   id: string,
-  message: string
+  message: string,
+  type: MessageType
 }
 
 interface AlertContextProps {
   alerts: Alert[],
-  addAlert: (message: string) => void,
+  addAlert: (message: string, type: MessageType) => void,
   removeAlert: (id: string) => void,
 }
 
@@ -21,9 +24,9 @@ const AlertContext = createContext<AlertContextProps>({
 export const AlertProvider = ({ children }: Children) => {
   const [alerts, setAlerts] = useState<Alert[]>([]);
 
-  const addAlert = (message: string) => {
+  const addAlert = (message: string, type: MessageType) => {
     const newAlerts = [...alerts];
-    newAlerts.push({ id: Date.now().toString(), message });
+    newAlerts.push({ id: Date.now().toString(), message: message, type: type });
     setAlerts(newAlerts);
   };
 
