@@ -89,6 +89,7 @@ export default function CreateLegalNeed({ auth }: Props) {
                                 />
                             </div>
                             <div className="mt-4">
+                                <InputError message={errors.AdditionalInformation} className="mt-2" />
 
                                 <label className="block mb-1">Additional Information</label>
                                 <span>In one sentence, briefly tell us what your case is about.
@@ -116,6 +117,8 @@ export default function CreateLegalNeed({ auth }: Props) {
                                 />
                             </div>
                             <div className="mt-4">
+                                <InputError message={errors.Question2} className="mt-2" />
+
                                 <label className="block mb-1">Question 2</label>
                                 <TextInput
                                     type="text"
@@ -126,6 +129,8 @@ export default function CreateLegalNeed({ auth }: Props) {
                                 />
                             </div>
                             <div className="mt-4">
+                                <InputError message={errors.Question3} className="mt-2" />
+
                                 <label className="block mb-1">Question 3</label>
                                 <TextInput
                                     type="text"
@@ -138,6 +143,8 @@ export default function CreateLegalNeed({ auth }: Props) {
 
                             {/* Legal Representation */}
                             <div className="mt-4">
+                                <InputError message={errors.ReasonForChange} className="mt-2" />
+
                                 <span>Do you currently have a
                                     lawyer or other
                                     representative currently
@@ -156,6 +163,7 @@ export default function CreateLegalNeed({ auth }: Props) {
                             </div>
 
                             <div className="mt-4">
+                                <InputError message={errors.Signature} className="mt-2" />
                                 <label className="block mb-1">Signature</label>
                                 <TextInput
                                     type="text"
@@ -166,6 +174,8 @@ export default function CreateLegalNeed({ auth }: Props) {
                                 />
                             </div>
                             <div className="mt-4">
+                                <InputError message={errors.PrintName} className="mt-2" />
+
                                 <label className="block mb-1">Print Name</label>
                                 <TextInput
                                     type="text"
@@ -188,11 +198,11 @@ export default function CreateLegalNeed({ auth }: Props) {
                             </div>
 
                             <div className='mt-6 flex items-center justify-end gap-x-6'>
-                            <PrimaryButton className="ms-4" disabled={processing}>
-                                Create
-                            </PrimaryButton>
+                                <PrimaryButton className="ms-4" disabled={processing}>
+                                    Create
+                                </PrimaryButton>
                             </div>
-                           
+
                         </form>
                     </div>
                 </div>

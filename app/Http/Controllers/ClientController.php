@@ -41,7 +41,7 @@ class ClientController extends Controller
             'Question1' => ['required', 'string'],
             'Question2' => ['nullable', 'string'],
             'Question3' => ['nullable', 'string'],
-            'ReasonForChange' => ['required', 'string'],
+            'ReasonForChange' => ['nullable', 'string'],
             'Signature' => ['required', 'string'],
             'PrintName' => ['required', 'string'],
             'SignDate' => ['required', 'date'],
