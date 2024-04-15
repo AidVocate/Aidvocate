@@ -61,8 +61,8 @@ const ApprovedList = ({ auth, cases }: Props) => {
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
           {/* Search input */}
           <TextField
-            label="Search"
-            variant="outlined"
+            variant="standard"
+            helperText="Search"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             fullWidth
