@@ -157,9 +157,9 @@ export default function NavBar({ routes, sidebar, user }: Props) {
         className="max-w-lg mx-auto"
         sx={{
           position: 'absolute',
-          top: '50px', // Adjust as needed
-          left: '20px', // Adjust as needed
-          right: '20px', // Adjust as needed
+          top: '50px',
+          left: '20px',
+          right: '20px',
         }}
       >
         {alerts.map((alert) => (
@@ -174,13 +174,13 @@ export default function NavBar({ routes, sidebar, user }: Props) {
             <Box
               key={alert.id}
               sx={{
-                marginBottom: '10px', // Adjust vertical spacing between alerts
+                marginBottom: '10px',
                 position: 'relative',
               }}
             >
               <Alert
                 className="shadow-lg"
-                severity="success"
+                severity={alert.type}
                 onClose={() => removeAlert(alert.id)}
               >
                 {alert.message}
