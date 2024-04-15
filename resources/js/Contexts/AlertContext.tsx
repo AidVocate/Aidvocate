@@ -10,7 +10,7 @@ interface Alert {
 
 interface AlertContextProps {
   alerts: Alert[],
-  addAlert: (message: string, type: MessageType) => void,
+  addAlert: (message: string, type?: MessageType) => void,
   removeAlert: (id: string) => void,
 }
 
@@ -24,7 +24,10 @@ const AlertContext = createContext<AlertContextProps>({
 export const AlertProvider = ({ children }: Children) => {
   const [alerts, setAlerts] = useState<Alert[]>([]);
 
-  const addAlert = (message: string, type: MessageType) => {
+  const addAlert = (message: string, type?: MessageType) => {
+    if (type === undefined) {
+      type = "success";
+    }
     const newAlerts = [...alerts];
     newAlerts.push({ id: Date.now().toString(), message: message, type: type });
     setAlerts(newAlerts);
