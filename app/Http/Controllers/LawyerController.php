@@ -23,18 +23,7 @@ class LawyerController extends Controller
 
     public function CaseList(Request $request)
     {
-        // // Retrieve all cases that are not approved and not assigned to a lawyer
-        // $cases = CaseModel::where('Approved', true)
-        //                  ->whereNotIn('CaseID', function ($query) {
-        //                      $query->select('CaseID')
-        //                            ->from('AssignedLawyer');
-        //                  })
-        //                  ->paginate(10);
-    
-        // // Return the view with the cases data
-        // return inertia('Lawyer/ViewLegalNeedBoard', [
-        //     'cases' => $cases
-        // ]);
+
 
         // Retrieve search parameters from the request
     $searchTerm = $request->input('search');
@@ -132,10 +121,8 @@ class LawyerController extends Controller
             'id' => $assignedLawyerId,
             'CaseID' => $CaseID,
         ]);
-        return redirect()->back()->with('flash', [
-            'type' => 'success',
-            'message' => 'Case successfully grabbed.'
-        ]);
+        return redirect(route('dashboard'))->with('message', 'You Grab The Case Successfully.');
+
     }
 
     // public function LawyerCaseList()
