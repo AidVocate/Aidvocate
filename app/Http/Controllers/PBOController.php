@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Inertia\Inertia;
 use App\Models\CaseModel;
+use App\Models\AssignedLawyer;
 use App\Models\Signature;
 use Illuminate\Http\Request;
 use App\Models\CaseQuestions;
@@ -49,6 +50,17 @@ class PBOController extends Controller
         ]);
     }
 
+    public function LawyerOffersList()
+    {
+        // Retrieve all cases that are not approved
+        $offers = AssignedLawyer::where('Approved', false)->paginate(10);
+
+        // Return the view with the cases data
+        return inertia('PBO/ViewLawyerOffersBoard', [
+            'offers' => $offers
+        ]);
+    }
+
     public function ViewLegalNeed($CaseID)
     {
         // Retrieve the case by its ID
@@ -80,6 +92,43 @@ class PBOController extends Controller
 
         // Redirect back with success message
         return redirect('/pbo/ViewLegalNeedBoard');
- 
+    }
+
+    public function ViewLawyerOffer($id, $CaseID)
+    {
+        // Retrieve lawyer details by their ID
+        $lawyerDetails = User::findOrFail($id);
+        
+        // Retrieve the case by its ID
+        $caseDetails = CaseModel::findOrFail($CaseID);
+        $caseQuestions = CaseQuestions::where('CaseID', $CaseID)->first();
+        $caseRepresentation = LegalRepresentation::where('CaseID', $CaseID)->first();
+        $caseSignature = Signature::where('CaseID', $CaseID)->first();
+        
+        // Retrieve user information associated with the case
+        $user = User::findOrFail($caseDetails->id);
+    
+        // Return the view with the case and offer data
+        return inertia('PBO/ViewLawyerOffer', [
+            'lawyerDetails' => $lawyerDetails,
+            'caseDetails' => $caseDetails,
+            'caseQuestions' => $caseQuestions,
+            'caseRepresentation' => $caseRepresentation,
+            'caseSignature' => $caseSignature,
+            'CasePerson' => $user,
+        ]);
+    }
+
+    public function ApproveLawyerOffer($id, $CaseID)
+    {
+        // Find the offer by caseID and lawyerID
+        $offer = AssignedLawyer::where('id', $id)
+                                ->findOrFail($CaseID);
+
+        // Update the 'Approved' column to true
+        $offer->update(['Approved' => 1]);
+
+        // Redirect back with success message
+        return redirect('/pbo/ViewLawyerOffersBoard');
     }
 }

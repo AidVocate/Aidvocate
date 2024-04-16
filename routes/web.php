@@ -90,8 +90,10 @@ Route::middleware(['auth', RoleMiddleware::class . ':PBO'])->group(function () {
     Route::get('/pbo', [PBOController::class, 'index']);
     Route::get('/pbo/ViewLegalNeed/{CaseID}', [PBOController::class, 'ViewLegalNeed']);
     Route::post('/pbo/ViewLegalNeed/{CaseID}', [PBOController::class, 'ApproveLegalNeed'])->name('cases.approve');
-    // Post for update/public legal need?
+    Route::get('/pbo/ViewLawyerOffer/{id}/{CaseID}', [PBOController::class, 'ViewLawyerOffer']);
+    Route::post('/pbo/ViewLawyerOffer/{id}/{CaseID}', [PBOController::class, 'ApproveLawyerOffer'])->name('offers.approve');
     Route::get('/pbo/ViewLegalNeedBoard', [PBOController::class, 'CaseList'])->name('cases.index');
+    Route::get('/pbo/ViewLawyerOffersBoard', [PBOController::class, 'LawyerOffersList'])->name('offers.index');
     // Other user routes...
 });
 
