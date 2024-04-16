@@ -38,6 +38,7 @@ const RouteMap: RouteMapType = {
   PBO: [
     {name: "Legal Need Board", route: "cases.index", icon: MailIcon},
     {name: "Lawyer Offers Board", route: "offers.index", icon: MailIcon},
+    {name: "Active Legal Needs Board", route: "active.index", icon: MailIcon},
   ]
 }
 

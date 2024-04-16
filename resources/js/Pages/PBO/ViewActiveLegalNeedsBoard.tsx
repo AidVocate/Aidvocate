@@ -1,6 +1,3 @@
-// import React from 'react';
-import { CaseModel } from '../../Components/CaseModel';
-import { AssignedLawyer } from '@/Components/ViewLegalNeedModels/AssignedLawyerModel';
 import { PersonInfo } from '@/Components/ViewLegalNeedModels/user';
 import { Inertia } from '@inertiajs/inertia';
 import Table from '@mui/material/Table';
@@ -12,7 +9,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head, Link } from '@inertiajs/react';
+import { Head } from '@inertiajs/react';
 import { TableHeaders } from '@/Components/ViewLegalNeedModels/TableModel';
 
 interface PaginatedResponse<T> {
@@ -29,26 +26,26 @@ interface PaginatedResponse<T> {
 }
 
 interface Props extends inertia.Auth {
-  offers: PaginatedResponse<TableHeaders>;
+  activeLN: PaginatedResponse<TableHeaders>;
   lawyers: PersonInfo;
   mustVerifyEmail: boolean;
   status?: 'verification-link-sent';
 }
 
-const LawyerOfferList = ({ auth, offers }: Props) => {
+const LawyerOfferList = ({ auth, activeLN }: Props) => {
     const handleButtonClick = (id: number, caseID: number) => {
         navigateToDifferentPage(id, caseID);
     }
 
     const navigateToDifferentPage = (id: number, caseID: number) => {
-        Inertia.visit(`/pbo/ViewLawyerOffer/${id}/${caseID}`);
+        Inertia.visit(`/pbo/ViewActiveLegalNeeds/${id}/${caseID}`);
     };
   return (
     <AuthenticatedLayout
       user={auth.user}
-      header={"Lawyer Offers Board"}
+      header={"Active Legal Needs Board"}
     >
-    <Head title="Lawyer Offers Board" />
+    <Head title="Active Legal Needs Board" />
     <div className="py-12">
       <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
         <TableContainer component={Paper}>
@@ -59,29 +56,31 @@ const LawyerOfferList = ({ auth, offers }: Props) => {
                 <TableCell>Lawyer Name</TableCell>
                 <TableCell>Lawyer Email</TableCell>
                 <TableCell>Case Nature</TableCell>
+                <TableCell>Active Since</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {offers.data.map((offersItem) => (
-                <TableRow key={offersItem.CaseID}>
+              {activeLN.data.map((activeLN) => (
+                <TableRow key={activeLN.CaseID}>
                   <TableCell>
-                    <Button variant="contained" onClick={() => handleButtonClick(offersItem.id, offersItem.CaseID)}>View</Button>
+                    <Button variant="contained" onClick={() => handleButtonClick(activeLN.id, activeLN.CaseID)}>View</Button>
                   </TableCell>
-                  <TableCell>{offersItem.FirstName} {offersItem.LastName}</TableCell>
-                  <TableCell>{offersItem.Email}</TableCell>
-                  <TableCell>{offersItem.NatureOfAppearance}</TableCell>
+                  <TableCell>{activeLN.FirstName} {activeLN.LastName}</TableCell>
+                  <TableCell>{activeLN.Email}</TableCell>
+                  <TableCell>{activeLN.NatureOfAppearance}</TableCell>
+                  <TableCell>{activeLN.formatted_date}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
           </Table>
         </TableContainer>
         <div>
-          {offers.prev_page_url && (
-            <Button onClick={() => Inertia.visit(offers.prev_page_url ?? '')}>Previous</Button>
+          {activeLN.prev_page_url && (
+            <Button onClick={() => Inertia.visit(activeLN.prev_page_url ?? '')}>Previous</Button>
           )}
-          <span>Page {offers.current_page} of {offers.last_page}</span>
-          {offers.next_page_url && (
-            <Button onClick={() => Inertia.visit(offers.next_page_url ?? '')}>Next</Button>
+          <span>Page {activeLN.current_page} of {activeLN.last_page}</span>
+          {activeLN.next_page_url && (
+            <Button onClick={() => Inertia.visit(activeLN.next_page_url ?? '')}>Next</Button>
           )}
         </div>
       </div>
