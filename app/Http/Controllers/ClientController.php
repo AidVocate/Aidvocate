@@ -124,7 +124,7 @@ class ClientController extends Controller
         }
 
         // Optionally, you can return a response indicating success
-        return redirect(route('dashboard', absolute: false));
+        return redirect(route('dashboard', absolute: false))->with('message', 'Legal Need Created successfully.');
     }
 
     public function ViewLegalNeed($userID): \Inertia\Response
@@ -191,6 +191,6 @@ class ClientController extends Controller
             'SignDate' => $request->SignDate,
         ]);
 
-        return redirect()->back()->with('success', 'Legal Need updated successfully.');
+        return redirect()->back()->with('message', 'Legal Need updated successfully.');
     }
 }
