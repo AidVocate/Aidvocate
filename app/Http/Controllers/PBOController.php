@@ -53,11 +53,14 @@ class PBOController extends Controller
     public function LawyerOffersList()
     {
         // Retrieve all cases that are not approved
-        $offers = AssignedLawyer::where('Approved', false)->paginate(10);
-
+        $offers = AssignedLawyer::join('users', 'AssignedLawyer.id', '=', 'users.id')
+                                ->join('Case', 'AssignedLawyer.CaseID', '=', 'Case.CaseID')
+                                ->select('AssignedLawyer.id', 'AssignedLawyer.CaseID', 'users.FirstName',
+                                         'users.LastName', 'users.Email', 'Case.NatureOfAppearance')
+                                ->where('AssignedLawyer.Approved', false)->paginate(10);
         // Return the view with the cases data
         return inertia('PBO/ViewLawyerOffersBoard', [
-            'offers' => $offers
+            'offers' => $offers,
         ]);
     }
 
@@ -125,12 +128,9 @@ class PBOController extends Controller
         // Find the offer by caseID and lawyerID
         $record = AssignedLawyer::where('CaseID', $CaseID)
                     ->where('id', $id)
-                    ->update(['Approved' => true]); 
-
-        // $queryLog = \DB::getQueryLog();
-        // dd($queryLog);
+                    ->update(['Approved' => true]);
 
         // Redirect back with success message
-        return redirect('pbo/ViewLawyerOffersBoard');
+        return redirect(route('offers.index'))->with('message', 'Lawyer Offer successfully approved.');
     }
 }

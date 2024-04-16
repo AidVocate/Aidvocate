@@ -25,6 +25,9 @@ export const AlertProvider = ({ children }: Children) => {
   const [alerts, setAlerts] = useState<Alert[]>([]);
 
   const addAlert = (message: string, type?: MessageType) => {
+    if (!message) {
+      return
+    }
     if (type === undefined) {
       type = "success";
     }
