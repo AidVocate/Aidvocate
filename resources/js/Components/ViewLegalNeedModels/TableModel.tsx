@@ -5,5 +5,6 @@ export interface TableHeaders {
     LastName: string;
     Email: string;
     NatureOfAppearance: string;
+    formatted_date: string;
     // Add other properties if needed
 }

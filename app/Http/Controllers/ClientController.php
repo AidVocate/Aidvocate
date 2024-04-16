@@ -124,11 +124,12 @@ class ClientController extends Controller
         }
 
         // Optionally, you can return a response indicating success
-        return redirect(route('dashboard', absolute: false))->with('message', 'Legal Need Created successfully.');
+        return redirect(route('dashboard'))->with('message', 'Legal Need Created successfully.');
     }
 
-    public function ViewLegalNeed($userID): \Inertia\Response
+    public function ViewLegalNeed() 
     {
+        $userID = Auth::id();
         // Retrieve the legal needs for the specified user
         $caseDetails = CaseModel::where('id', $userID)
             ->with('caseQuestions', 'legalRepresentation', 'signature')
@@ -140,7 +141,6 @@ class ClientController extends Controller
             'caseQuestions' => $caseDetails->caseQuestions,
             'caseRepresentation' => $caseDetails->legalRepresentation,
             'caseSignature' => $caseDetails->signature,
-            'auth' => Auth::user()
         ]);
     }
 
