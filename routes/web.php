@@ -13,7 +13,6 @@ use Tests\Feature\Auth\EmailVerificationTest;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Middleware\RoleMiddleware;
 
-require __DIR__.'/auth.php';
 
 
 Route::get('/', function () {
@@ -97,6 +96,7 @@ Route::middleware(['auth', RoleMiddleware::class . ':PBO'])->group(function () {
     // Other user routes...
 });
 
+require __DIR__.'/auth.php';
 
 //404
 Route::get('/{any}', function () {
