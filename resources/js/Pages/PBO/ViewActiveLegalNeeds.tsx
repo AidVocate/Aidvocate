@@ -27,10 +27,10 @@ const LegalNeed: React.FC<Props> = ({ caseDetails: caseData, caseQuestions: ques
     return (
         <AuthenticatedLayout
             user={auth.user}
-            header={"Lawyer Offer Board"}
+            header={"Active Legal Needs Board"}
         >
 
-            <Head title="Lawyer Offer Board" />
+            <Head title="Active Legal Needs Board" />
 
             <div className="container mx-auto mt-8 p-8 bg-white rounded-lg shadow-lg border border-gray-200">
             <h2 className="text-2xl font-bold mb-6 border-b pb-2">Lawyer Details</h2>
@@ -150,8 +150,8 @@ const LegalNeed: React.FC<Props> = ({ caseDetails: caseData, caseQuestions: ques
                     </div>
 
                     {/* Submit button */}
-                    <Link href={route('offers.approve', {id: lawyerData.id, CaseID: caseData.CaseID})} method="post" as="button" className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-colors">
-                        Approve Lawyer
+                    <Link href={route('active.close', {id: lawyerData.id, CaseID: caseData.CaseID})} method="post" as="button" className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-colors">
+                        Close Legal Need
                     </Link>
                 </div>
             </div>

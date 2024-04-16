@@ -67,7 +67,7 @@ Route::middleware(['auth', RoleMiddleware::class . ':Client'])->group(function (
     Route::get('/client', [ClientController::class, 'index']);
     Route::get('/client/CreateLegalNeed', [ClientController::class, 'ViewLegalNeedForm']);
     Route::post('/client/CreateLegalNeed', [ClientController::class, 'AddLegalNeed'])->name('createLegalNeed');
-    Route::get('/client/ViewLegalNeed/{UserID}', [ClientController::class, 'ViewLegalNeed'])->name('client-ViewLegalNeed');
+    Route::get('/client/ViewLegalNeed', [ClientController::class, 'ViewLegalNeed'])->name('client-ViewLegalNeed');
     Route::post('/client/UpdateLegalNeed/{userID}/{caseID}', [ClientController::class, 'UpdateLegalNeed'])->name('client-UpdateLegalNeed');
 });
 
@@ -91,8 +91,11 @@ Route::middleware(['auth', RoleMiddleware::class . ':PBO'])->group(function () {
     Route::post('/pbo/ViewLegalNeed/{CaseID}', [PBOController::class, 'ApproveLegalNeed'])->name('cases.approve');
     Route::get('/pbo/ViewLawyerOffer/{id}/{CaseID}', [PBOController::class, 'ViewLawyerOffer']);
     Route::post('/pbo/ViewLawyerOffer/{id}/{CaseID}', [PBOController::class, 'ApproveLawyerOffer'])->name('offers.approve');
+    Route::get('/pbo/ViewActiveLegalNeeds/{id}/{CaseID}', [PBOController::class, 'ViewActiveLegalNeed']);
+    Route::post('/pbo/ViewActiveLegalNeeds/{id}/{CaseID}', [PBOController::class, 'CloseActiveLegalNeed'])->name('active.close');
     Route::get('/pbo/ViewLegalNeedBoard', [PBOController::class, 'CaseList'])->name('cases.index');
     Route::get('/pbo/ViewLawyerOffersBoard', [PBOController::class, 'LawyerOffersList'])->name('offers.index');
+    Route::get('/pbo/ViewActiveLegalNeedsBoard', [PBOController::class, 'ActiveLegalNeedsList'])->name('active.index');
     // Other user routes...
 });
 

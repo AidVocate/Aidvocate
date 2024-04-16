@@ -14,6 +14,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
 
 class PBOController extends Controller
 {
@@ -64,6 +65,24 @@ class PBOController extends Controller
         ]);
     }
 
+    public function ActiveLegalNeedsList()
+    {
+        // Retrieve all cases that are not approved
+        $activeLN = AssignedLawyer::join('users', 'AssignedLawyer.id', '=', 'users.id')
+                                ->join('Case', 'AssignedLawyer.CaseID', '=', 'Case.CaseID')
+                                ->select('AssignedLawyer.id', 'AssignedLawyer.CaseID', 
+                                DB::raw('DATE_FORMAT(AssignedLawyer.updated_at, "%Y-%m-%d") as formatted_date'),
+                                'users.FirstName', 'users.LastName', 'users.Email', 'Case.NatureOfAppearance')
+                                ->where('AssignedLawyer.Approved', true)
+                                ->where('AssignedLawyer.Case_Close', false)
+                                ->paginate(10);
+
+        // Return the view with the cases data
+        return inertia('PBO/ViewActiveLegalNeedsBoard', [
+            'activeLN' => $activeLN
+        ]);
+    }
+
     public function ViewLegalNeed($CaseID)
     {
         // Retrieve the case by its ID
@@ -94,7 +113,7 @@ class PBOController extends Controller
         $case->update(['Approved' => 1]);
 
         // Redirect back with success message
-        return redirect('/pbo/ViewLegalNeedBoard');
+        return redirect(route('cases.index'))->with('message', 'Legal Need successfully approved.');
     }
 
     public function ViewLawyerOffer($id, $CaseID)
@@ -124,7 +143,6 @@ class PBOController extends Controller
 
     public function ApproveLawyerOffer($id, $CaseID)
     {
-        \DB::connection()->enableQueryLog();
         // Find the offer by caseID and lawyerID
         $record = AssignedLawyer::where('CaseID', $CaseID)
                     ->where('id', $id)
@@ -132,5 +150,41 @@ class PBOController extends Controller
 
         // Redirect back with success message
         return redirect(route('offers.index'))->with('message', 'Lawyer Offer successfully approved.');
+    }
+
+    public function ViewActiveLegalNeed($id, $CaseID)
+    {
+        // Retrieve lawyer details by their ID
+        $lawyerDetails = User::findOrFail($id);
+        
+        // Retrieve the case by its ID
+        $caseDetails = CaseModel::findOrFail($CaseID);
+        $caseQuestions = CaseQuestions::where('CaseID', $CaseID)->first();
+        $caseRepresentation = LegalRepresentation::where('CaseID', $CaseID)->first();
+        $caseSignature = Signature::where('CaseID', $CaseID)->first();
+        
+        // Retrieve user information associated with the case
+        $clientDetails = User::findOrFail($caseDetails->id);
+    
+        // Return the view with the case and offer data
+        return inertia('PBO/ViewActiveLegalNeeds', [
+            'lawyerDetails' => $lawyerDetails,
+            'caseDetails' => $caseDetails,
+            'caseQuestions' => $caseQuestions,
+            'caseRepresentation' => $caseRepresentation,
+            'caseSignature' => $caseSignature,
+            'clientDetails' => $clientDetails,
+        ]);
+    }
+
+    public function CloseActiveLegalNeed($id, $CaseID)
+    {
+        // Find the offer by caseID and lawyerID
+        $record = AssignedLawyer::where('CaseID', $CaseID)
+                    ->where('id', $id)
+                    ->update(['Case_Close' => true]);
+
+        // Redirect back with success message
+        return redirect(route('active.index'))->with('message', 'Legal Need successfully closed.');
     }
 }
