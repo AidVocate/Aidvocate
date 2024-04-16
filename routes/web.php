@@ -68,7 +68,7 @@ Route::middleware(['auth', RoleMiddleware::class . ':Client'])->group(function (
     Route::get('/client', [ClientController::class, 'index']);
     Route::get('/client/CreateLegalNeed', [ClientController::class, 'ViewLegalNeedForm']);
     Route::post('/client/CreateLegalNeed', [ClientController::class, 'AddLegalNeed'])->name('createLegalNeed');
-    Route::get('/client/ViewLegalNeed/{UserID}', [ClientController::class, 'ViewLegalNeed'])->name('client-ViewLegalNeed');
+    Route::get('/client/ViewLegalNeed', [ClientController::class, 'ViewLegalNeed'])->name('client-ViewLegalNeed');
     Route::post('/client/UpdateLegalNeed/{userID}/{caseID}', [ClientController::class, 'UpdateLegalNeed'])->name('client-UpdateLegalNeed');
 });
 

@@ -29,7 +29,8 @@ interface DashboardMapType {
 const RouteMap: RouteMapType = {
   Admin: [],
   Client: [
-    {name: "Create Legal Need", route: "createLegalNeed", icon: MailIcon}
+    {name: "Create Legal Need", route: "createLegalNeed", icon: MailIcon},
+    {name: "View Legal Need", route: "client-ViewLegalNeed", icon: MailIcon},
   ],
   Lawyer: [
     {name: "Board", route: "lawyer.board", icon: MailIcon},
