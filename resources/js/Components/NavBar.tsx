@@ -1,4 +1,4 @@
-import { useState, MouseEvent, MouseEventHandler } from 'react';
+import { useState, useEffect, MouseEvent, MouseEventHandler } from 'react';
 import Icon from '@/Components/Icon';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -27,8 +27,9 @@ import { Link } from '@inertiajs/react';
 import { OverridableComponent } from '@mui/material/OverridableComponent';
 import { SvgIconTypeMap } from '@mui/material/SvgIcon';
 import Slide from '@mui/material/Slide';
-import { useAlertContext } from '@/Contexts/AlertContext';
 import { useRouteContext } from '@/Contexts/RouteContext';
+import { useAlertContext, Alert as AlertType } from '@/Contexts/AlertContext';
+import { usePage } from '@inertiajs/react'
 
 interface Props {
   routes?: RouteInfo[]
@@ -75,7 +76,14 @@ const LinkIcon = ({ name }: {name: string}) => {
 
 export default function NavBar({ routes, sidebar, user }: Props) {
   const { getRoutes } = useRouteContext();
-  const { alerts, removeAlert } = useAlertContext();
+  const { alerts, removeAlert, addAlert, clearAlerts } = useAlertContext();
+  const { flash } = usePage().props
+
+  useEffect(() => {
+    clearAlerts();
+    addAlert(flash.message);
+  }, []);
+
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [openSide, setOpenSide] = useState(false);
   const open = Boolean(anchorEl);
