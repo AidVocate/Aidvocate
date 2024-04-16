@@ -53,22 +53,21 @@ const LawyerOfferList = ({ auth, offers }: Props) => {
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell>View Legal Need</TableCell>
+              <TableCell>View Legal Need</TableCell>
                 <TableCell>Lawyer ID</TableCell>
                 {/* Use Lawyer Email for Lawyer ID column */}
                 <TableCell>Case ID</TableCell> 
                 {/* Use Nature of Case for CaseID column */}
-                <TableCell align='right'>Approve Offer</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {offers.data.map((offersItem) => (
                 <TableRow key={offersItem.CaseID}>
-                  <TableCell>{offersItem.id}</TableCell>
-                  <TableCell>{offersItem.CaseID}</TableCell>
                   <TableCell>
                     <Button variant="contained" onClick={() => handleButtonClick(offersItem.id, offersItem.CaseID)}>View</Button>
                   </TableCell>
+                  <TableCell>{offersItem.id}</TableCell>
+                  <TableCell>{offersItem.CaseID}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
