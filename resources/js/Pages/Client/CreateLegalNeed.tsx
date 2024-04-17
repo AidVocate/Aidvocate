@@ -1,5 +1,5 @@
 import { FormEvent } from 'react';
-import { Head, Link, useForm } from '@inertiajs/react';
+import { Head, useForm } from '@inertiajs/react';
 import InputError from '@/Components/InputError';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
@@ -48,8 +48,9 @@ export default function CreateLegalNeed({ auth }: Props) {
                         <form onSubmit={handleSubmit} className="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                             {/* Case Information */}
                             <div className="mt-4">
+                                <h2 className="block mb-1">Case Information</h2>
                                 <InputError message={errors.NatureOfAppearance} className="mt-2" />
-                                <label className="block mb-1">What is the nature of that appearance? </label>
+                                <label className="block mb-1">What is the nature of your court appearance?</label>
                                 <TextInput
                                     type="text"
                                     id="NatureOfAppearance"
@@ -63,7 +64,7 @@ export default function CreateLegalNeed({ auth }: Props) {
                             </div>
                             <div className="mt-4">
                                 <InputError message={errors.DateOfNextAppearance} className="mt-2" />
-                                <label className="block mb-1">What is the date of your next appearance before a Judge?</label>
+                                <label className="block mb-1">What is the date of your next court appearance?</label>
                                 <TextInput
                                     id="DateOfNextAppearance"
                                     name="DateOfNextAppearance"
@@ -78,7 +79,7 @@ export default function CreateLegalNeed({ auth }: Props) {
 
                             <div className="mt-4">
                                 <InputError message={errors.ServicesLanguage} className="mt-2" />
-                                <label className="block mb-1">Service Language?</label>
+                                <label className="block mb-1">Do you need services in another language?</label>
                                 <TextInput
                                     type="text"
                                     id="ServicesLanguage"
@@ -91,9 +92,7 @@ export default function CreateLegalNeed({ auth }: Props) {
                             <div className="mt-4">
                                 <InputError message={errors.AdditionalInformation} className="mt-2" />
 
-                                <label className="block mb-1">Additional Information</label>
-                                <span>In one sentence, briefly tell us what your case is about.
-                                    Why are you suing or being sued?</span>
+                                <span>In one sentence, briefly tell us what your case is about.</span>
                                 <TextareaAutosize
                                     name="AdditionalInformation"
                                     value={data.AdditionalInformation}
@@ -104,8 +103,8 @@ export default function CreateLegalNeed({ auth }: Props) {
 
                             {/* Case Questions */}
                             <div className="mt-4">
+                                <h2 className="block mb-1">Additional Information</h2>
                                 <span>What are your 3 main questions?</span>
-
                                 <InputError message={errors.Question1} className="mt-2" />
                                 <label className="block mb-1">Question 1</label>
                                 <TextInput
@@ -161,7 +160,7 @@ export default function CreateLegalNeed({ auth }: Props) {
                                     className="border border-gray-300 rounded px-4 py-2 w-full"
                                 />
                             </div>
-
+                            <h2 className="block mb-1">Signature Block</h2>
                             <div className="mt-4">
                                 <InputError message={errors.Signature} className="mt-2" />
                                 <label className="block mb-1">Signature</label>

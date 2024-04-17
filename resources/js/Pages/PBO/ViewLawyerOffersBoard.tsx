@@ -1,6 +1,3 @@
-// import React from 'react';
-import { CaseModel } from '../../Components/CaseModel';
-import { AssignedLawyer } from '@/Components/ViewLegalNeedModels/AssignedLawyerModel';
 import { PersonInfo } from '@/Components/ViewLegalNeedModels/user';
 import { Inertia } from '@inertiajs/inertia';
 import Table from '@mui/material/Table';
@@ -12,7 +9,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head, Link } from '@inertiajs/react';
+import { Head } from '@inertiajs/react';
 import { TableHeaders } from '@/Components/ViewLegalNeedModels/TableModel';
 
 interface PaginatedResponse<T> {

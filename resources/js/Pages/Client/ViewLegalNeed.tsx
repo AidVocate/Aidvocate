@@ -63,20 +63,24 @@ const LegalNeed: React.FC<Props> = ({ caseDetails: caseData, caseQuestions: ques
                             {/* Case Information Section */}
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
-                                    <label className="block mb-1 font-medium text-gray-600">Date of Next Appearance</label>
-                                    <input type="text" value={data.DateOfNextAppearance} onChange={(e) => setData('DateOfNextAppearance', e.target.value)} />
+                                    <label className="block mb-1">Date of Next Appearance</label>
+                                    <input type="text" value={data.DateOfNextAppearance} onChange={(e) => setData('DateOfNextAppearance', e.target.value)} 
+                                            className='border border-gray-300 rounded px-4 py-2 w-full' />
                                 </div>
                                 <div>
-                                    <label className="block mb-1 font-medium text-gray-600">Nature of Appearance</label>
-                                    <input type="text" value={data.NatureOfAppearance} onChange={(e) => setData('NatureOfAppearance', e.target.value)} />
+                                    <label className="block mb-1">Nature of Appearance</label>
+                                    <input type="text" value={data.NatureOfAppearance} onChange={(e) => setData('NatureOfAppearance', e.target.value)} 
+                                            className='border border-gray-300 rounded px-4 py-2 w-full' />
                                 </div>
                                 <div>
-                                    <label className="block mb-1 font-medium text-gray-600">Service Language</label>
-                                    <input type="text" value={data.ServicesLanguage} onChange={(e) => setData('ServicesLanguage', e.target.value)} />
+                                    <label className="block mb-1">Service Language</label>
+                                    <input type="text" value={data.ServicesLanguage} onChange={(e) => setData('ServicesLanguage', e.target.value)} 
+                                            className='border border-gray-300 rounded px-4 py-2 w-full' />
                                 </div>
                                 <div>
-                                    <label className="block mb-1 font-medium text-gray-600">Additional Information</label>
-                                    <input type="text" value={data.AdditionalInformation} onChange={(e) => setData('AdditionalInformation', e.target.value)} />
+                                    <label className="block mb-1">Additional Information</label>
+                                    <input type="text" value={data.AdditionalInformation} onChange={(e) => setData('AdditionalInformation', e.target.value)} 
+                                            className='border border-gray-300 rounded px-4 py-2 w-full' />
                                 </div>
                             </div>
                         </div>
@@ -86,16 +90,19 @@ const LegalNeed: React.FC<Props> = ({ caseDetails: caseData, caseQuestions: ques
                             <h3 className="font-bold mb-2 text-gray-800">Case Questions</h3>
                             <div className="space-y-2">
                                 <div>
-                                    <label className="block mb-1 font-medium text-gray-600">Question 1</label>
-                                    <input type="text" value={data.Question1} onChange={(e) => setData('Question1', e.target.value)} />
+                                    <label className="block mb-1">Question 1</label>
+                                    <input type="text" value={data.Question1} onChange={(e) => setData('Question1', e.target.value)} 
+                                            className='border border-gray-300 rounded px-4 py-2 w-full' />
                                 </div>
                                 <div>
-                                    <label className="block mb-1 font-medium text-gray-600">Question 2</label>
-                                    <input type="text" value={data.Question2} onChange={(e) => setData('Question2', e.target.value)} />
+                                    <label className="block mb-1">Question 2</label>
+                                    <input type="text" value={data.Question2} onChange={(e) => setData('Question2', e.target.value)} 
+                                            className='border border-gray-300 rounded px-4 py-2 w-full' />
                                 </div>
                                 <div>
-                                    <label className="block mb-1 font-medium text-gray-600">Question 3</label>
-                                    <input type="text" value={data.Question3} onChange={(e) => setData('Question3', e.target.value)} />
+                                    <label className="block mb-1">Question 3</label>
+                                    <input type="text" value={data.Question3} onChange={(e) => setData('Question3', e.target.value)} 
+                                            className='border border-gray-300 rounded px-4 py-2 w-full' />
                                 </div>
                             </div>
                         </div>
@@ -104,8 +111,9 @@ const LegalNeed: React.FC<Props> = ({ caseDetails: caseData, caseQuestions: ques
                         <div className="p-4 bg-gray-50 rounded">
                             <h3 className="font-bold mb-2 text-gray-800">Case Representation</h3>
                             <div>
-                                <label className="block mb-1 font-medium text-gray-600">Reason for Change</label>
-                                <input type="text" value={data.ReasonForChange} onChange={(e) => setData('ReasonForChange', e.target.value)} />
+                                <label className="block mb-1">Reason for Change</label>
+                                <input type="text" value={data.ReasonForChange} onChange={(e) => setData('ReasonForChange', e.target.value)}
+                                        className='border border-gray-300 rounded px-4 py-2 w-full' />
                             </div>
                         </div>
 
@@ -114,16 +122,19 @@ const LegalNeed: React.FC<Props> = ({ caseDetails: caseData, caseQuestions: ques
                             <h3 className="font-bold mb-2 text-gray-800">Case Signature</h3>
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                                 <div>
-                                    <label className="block mb-1 font-medium text-gray-600">Signature</label>
-                                    <input type="text" value={data.Signature} onChange={(e) => setData('Signature', e.target.value)} />
+                                    <label className="block mb-1">Signature</label>
+                                    <input type="text" value={data.Signature} onChange={(e) => setData('Signature', e.target.value)}
+                                            className='border border-gray-300 rounded px-4 py-2 w-full' />
                                 </div>
                                 <div>
-                                    <label className="block mb-1 font-medium text-gray-600">Print Name</label>
-                                    <input type="text" value={data.PrintName} onChange={(e) => setData('PrintName', e.target.value)} />
+                                    <label className="block mb-1">Print Name</label>
+                                    <input type="text" value={data.PrintName} onChange={(e) => setData('PrintName', e.target.value)}
+                                            className='border border-gray-300 rounded px-4 py-2 w-full' />
                                 </div>
                                 <div>
-                                    <label className="block mb-1 font-medium text-gray-600">Sign Date</label>
-                                    <input type="text" value={data.SignDate} onChange={(e) => setData('SignDate', e.target.value)} />
+                                    <label className="block mb-1">Sign Date</label>
+                                    <input type="text" value={data.SignDate} onChange={(e) => setData('SignDate', e.target.value)}
+                                            className='border border-gray-300 rounded px-4 py-2 w-full' />
                                 </div>
                             </div>
                         </div>
