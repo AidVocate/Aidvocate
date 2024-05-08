@@ -125,23 +125,6 @@ class LawyerController extends Controller
 
     }
 
-    // public function LawyerCaseList()
-    // {
-    //     // Get the ID of the currently logged-in lawyer
-    //     $lawyerId = auth()->id();
-    
-    //     // Retrieve cases assigned to the current lawyer along with Approved and Case_Close statuses
-    //     $cases = CaseModel::select('Case.*', 'AssignedLawyer.Approved', 'AssignedLawyer.Case_Close')
-    //         ->leftJoin('AssignedLawyer', 'Case.CaseID', '=', 'AssignedLawyer.CaseID')
-    //         ->where('AssignedLawyer.id', $lawyerId)
-    //         ->paginate(10);
-    
-    //     // Return the view with the cases data
-    //     return inertia('Lawyer/LawyerCases', [
-    //         'cases' => $cases
-    //     ]);
-    // }
-
     public function LawyerCaseList(Request $request)
 {
     // Get the ID of the currently logged-in lawyer

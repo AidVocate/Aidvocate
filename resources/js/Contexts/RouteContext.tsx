@@ -33,8 +33,8 @@ const RouteMap: RouteMapType = {
     {name: "View Legal Need", route: "client-ViewLegalNeed", icon: MailIcon},
   ],
   Lawyer: [
-    {name: "Board", route: "lawyer.board", icon: MailIcon},
-    {name: "Cases", route: "lawyer.cases", icon: MailIcon},
+    {name: "Legal Need Board", route: "lawyer.board", icon: MailIcon},
+    {name: "Lawyer's Cases", route: "lawyer.cases", icon: MailIcon},
   ],
   PBO: [
     {name: "Legal Need Board", route: "cases.index", icon: MailIcon},

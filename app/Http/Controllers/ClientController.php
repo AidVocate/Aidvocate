@@ -30,7 +30,6 @@ class ClientController extends Controller
     public function AddLegalNeed(Request $request): RedirectResponse
     {
         $userId = Auth::id();
-        // dd($request->all());
         // Retrieve all form fields from the request
         // Define validation rules for all form fields
         $request->validate ([
@@ -46,21 +45,6 @@ class ClientController extends Controller
             'PrintName' => ['required', 'string'],
             'SignDate' => ['required', 'date'],
         ]);
-
-        // $formFields = $request->only([
-        //     'DateOfNextAppearance',
-        //     'NatureOfAppearance',
-        //     'ServicesLanguage',
-        //     'AdditionalInformation',
-        //     'Question1',
-        //     'Question2',
-        //     'Question3',
-        //     'ReasonForChange',
-        //     'Signature',
-        //     'PrintName',
-        //     'SignDate',
-        // ]);
-
 
         // Create the case model
         $case = CaseModel::create([
